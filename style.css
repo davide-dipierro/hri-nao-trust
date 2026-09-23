@@ -601,7 +601,6 @@ main {
 }
 
 .badge-h1 { background: #e0f2fe; color: #0284c7; }
-.badge-h2 { background: #fef3c7; color: #b45309; }
 .badge-h3 { background: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe; }
 .badge-max { background: #fee2e2; color: #b91c1c; }
 .badge-alta { background: #fed7aa; color: #c2410c; }
@@ -992,11 +991,6 @@ th.sortable.sort-desc .sort-icon::after {
     color: #b91c1c;
 }
 
-.corr-rt-badge {
-    background: #fef3c7;
-    color: #b45309;
-}
-
 .corr-neutral-badge {
     background: #f1f5f9;
     color: #64748b;
@@ -1036,13 +1030,6 @@ th.sortable.sort-desc .sort-icon::after {
     background: #f8fafc;
     color: #94a3b8;
     border: 1px solid #e2e8f0;
-}
-
-.p-rt-note {
-    font-size: 0.72rem;
-    color: #64748b;
-    font-family: 'Consolas', 'Courier New', monospace;
-    margin-top: 2px;
 }
 
 /* Formal Tests & Hypothesis Tables */
@@ -1297,7 +1284,6 @@ th.sortable.sort-desc .sort-icon::after {
 }
 
 .hypo-seq-h1 { border-top: 5px solid #0284c7; }
-.hypo-seq-h2 { border-top: 5px solid #d97706; }
 .hypo-seq-h3 { border-top: 5px solid #7c3aed; }
 
 .hypo-seq-header {
@@ -1368,15 +1354,12 @@ th.sortable.sort-desc .sort-icon::after {
 }
 
 .hypo-seq-h1 .hypo-statement { border-left-color: #0284c7; }
-.hypo-seq-h2 .hypo-statement { border-left-color: #d97706; }
 .hypo-seq-h3 .hypo-statement { border-left-color: #7c3aed; }
 
 .hypo-seq-h1 .test-interpretation-box { border-left-color: #0284c7; }
-.hypo-seq-h2 .test-interpretation-box { border-left-color: #d97706; }
 .hypo-seq-h3 .test-interpretation-box { border-left-color: #7c3aed; }
 
 .hypo-seq-h1 .hypo-quick-kpi { border-top: 3px solid #0284c7; }
-.hypo-seq-h2 .hypo-quick-kpi { border-top: 3px solid #d97706; }
 .hypo-seq-h3 .hypo-quick-kpi { border-top: 3px solid #7c3aed; }
 
 .hypo-variables {

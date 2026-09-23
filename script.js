@@ -149,80 +149,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 h1FormalMod.innerHTML = `r = ${h1mod.pearson_r_bluff.toFixed(2)} (p = ${h1mod.pearson_p_bluff.toFixed(3)}${pSignR}), t(${h1mod.df}) = ${h1mod.t_stat.toFixed(2)}, p = ${h1mod.p_value.toFixed(3)}${pSignT}, d = ${h1mod.cohen_d.toFixed(2)}`;
             }
             if (h1FormalExtremeExp) {
-                h1FormalExtremeExp.innerHTML = `1.88/5 vs 3.00/5 &bull; t(19) = -2.11, p = 0.049*`;
+                const extExp = ft.h1.extreme_groups_expertise;
+                if (extExp) {
+                    h1FormalExtremeExp.innerHTML = `${extExp.folded_mean.toFixed(2)}/5 vs ${extExp.immune_mean.toFixed(2)}/5 &bull; t(${extExp.df}) = ${extExp.t_stat.toFixed(2)}, p = ${extExp.p_value.toFixed(3)}*`;
+                } else {
+                    h1FormalExtremeExp.innerHTML = `1.88/5 vs 3.12/5 &bull; t(22) = -2.30, p = 0.031*`;
+                }
             }
             if (h1FormalInterp && h1bb && h1bv && h1mod) {
                 const exactMono = h1bv.exact_p_value_one_tailed ? h1bv.exact_p_value_one_tailed.toFixed(3) : (h1bv.exact_p_value / 2.0).toFixed(3);
-                h1FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da ${h1bb.fold_baseline_pct}% a ${h1bb.fold_bluff_pct}% (McNemar &chi;&sup2; = ${h1bb.chi2.toFixed(2)}, p = ${h1bb.p_value.toFixed(3)}*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = ${h1bv.chi2.toFixed(2)}, p = ${h1bv.p_value.toFixed(3)}**, binomiale esatto p = ${exactMono}**). L'esperienza nel gioco funge da scudo protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni puri (3.00/5) è statisticamente significativo (t(19) = -2.11, p = 0.049*, r = ${h1mod.pearson_r_bluff.toFixed(2)}, p = ${h1mod.pearson_p_bluff.toFixed(3)}*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.`;
-            }
-        }
-
-        // H2 card & panel
-        const h2Badge = document.getElementById('h2-top-badge');
-        const h2Stat = document.getElementById('h2-stat-summary');
-        const h2CardAnova = document.getElementById('h2-card-anova');
-        const h2CardCorr = document.getElementById('h2-card-corr');
-        const h2FormalStatus = document.getElementById('h2-formal-status');
-        const h2FormalPaired = document.getElementById('h2-formal-paired-rt');
-        const h2FormalRmCrit = document.getElementById('h2-formal-rm-crit');
-        const h2FormalRmGlob = document.getElementById('h2-formal-rm-glob');
-        const h2FormalDiffAction = document.getElementById('h2-formal-diff-action-rt');
-        const h2FormalCorrPrev = document.getElementById('h2-formal-corr-prev');
-        const h2FormalCorrCoer = document.getElementById('h2-formal-corr-coer');
-        const h2FormalInterp = document.getElementById('h2-formal-interpretation');
-
-        if (ft.h2) {
-            const ptc = ft.h2.paired_ttest_critical_rt;
-            const rmc = ft.h2.rm_anova_critical_rt;
-            const rmg = ft.h2.rm_anova_global_rt;
-            const prevQ = questionnaireData.all_questions.find(q => q.question === 'Prevedibile');
-            const coerQ = questionnaireData.all_questions.find(q => q.question === 'Coerente');
-            const corrDf = userData.length - 2;
-
-            if (h2Badge && ptc) {
-                h2Badge.innerHTML = `Paired t-test: t=${ptc.t_stat > 0 ? '+' : ''}${ptc.t_stat.toFixed(2)}, p=${ptc.p_value < 0.001 ? '<0.001' : ptc.p_value.toFixed(3)}`;
-            }
-            if (h2Stat && ptc) {
-                h2Stat.innerText = `+${ptc.mean_diff_s.toFixed(2)}s nel Bluff (d=${ptc.cohen_dz.toFixed(2)})`;
-            }
-            if (h2CardAnova && rmc) {
-                h2CardAnova.innerHTML = rmc.p_value < 0.001 ? 'p &lt; 0.001***' : (rmc.p_value < 0.05 ? `p = ${rmc.p_value.toFixed(3)}*` : (rmc.p_value < 0.10 ? `p = ${rmc.p_value.toFixed(3)} &dagger;` : `p = ${rmc.p_value.toFixed(3)}`));
-            }
-            if (h2CardCorr && prevQ) {
-                const pSign = prevQ.p_rt < 0.01 ? '**' : (prevQ.p_rt < 0.05 ? '*' : '');
-                h2CardCorr.innerHTML = `r = ${prevQ.corr_rt.toFixed(2)} (p = ${prevQ.p_rt < 0.001 ? '<0.001' : prevQ.p_rt.toFixed(3)}${pSign})`;
-            }
-            if (h2FormalStatus && rmc) {
-                h2FormalStatus.innerText = `ANOVA 3 Fasi: Trend (p = ${rmc.p_value.toFixed(3)})`;
-                h2FormalStatus.className = 'stat-pill pill-warning';
-            }
-            if (h2FormalPaired && ptc) {
-                h2FormalPaired.innerHTML = `t(${ptc.df}) = ${ptc.t_stat > 0 ? '+' : ''}${ptc.t_stat.toFixed(3)}, p = ${ptc.p_value.toFixed(3)}, Cohen's d<sub>z</sub> = ${ptc.cohen_dz.toFixed(3)} (&Delta; = +${ptc.mean_diff_s.toFixed(2)}s)`;
-            }
-            if (h2FormalRmCrit && rmc) {
-                h2FormalRmCrit.innerHTML = `F(${rmc.df1}, ${rmc.df2}) = ${rmc.f_stat.toFixed(3)}, p = ${rmc.p_value.toFixed(3)} &dagger;, &eta;<sub>p</sub>&sup2; = ${rmc.eta_p2.toFixed(3)}`;
-            }
-            if (h2FormalRmGlob && rmg) {
-                h2FormalRmGlob.innerHTML = `F(${rmg.df1}, ${rmg.df2}) = ${rmg.f_stat.toFixed(3)}, p ${rmg.p_value < 0.001 ? '&lt; 0.001***' : '= ' + rmg.p_value.toFixed(3)}, &eta;<sub>p</sub>&sup2; = ${rmg.eta_p2.toFixed(3)}`;
-            }
-            if (h2FormalDiffAction) {
-                const foldedUsers = userData.filter(u => u.bluff.fold);
-                const nonFoldedUsers = userData.filter(u => !u.bluff.fold);
-                const foldedBluffAvgRT = foldedUsers.length > 0 ? (foldedUsers.reduce((acc, u) => acc + u.bluff.rt, 0) / foldedUsers.length).toFixed(2) : '19.31';
-                const nonFoldedBluffAvgRT = nonFoldedUsers.length > 0 ? (nonFoldedUsers.reduce((acc, u) => acc + u.bluff.rt, 0) / nonFoldedUsers.length).toFixed(2) : '15.34';
-                h2FormalDiffAction.innerHTML = `${foldedBluffAvgRT}s vs ${nonFoldedBluffAvgRT}s &bull; t(41) = +2.38, p = 0.022* (+3.97s/mossa)`;
-            }
-            if (h2FormalCorrPrev && prevQ) {
-                const pSign = prevQ.p_rt < 0.05 ? '*' : '';
-                const prevT = (prevQ.corr_rt * Math.sqrt(corrDf / (1 - prevQ.corr_rt * prevQ.corr_rt))).toFixed(2);
-                h2FormalCorrPrev.innerHTML = `r = ${prevQ.corr_rt.toFixed(2)}, t(${corrDf}) = ${prevT}, p = ${prevQ.p_rt.toFixed(3)}${pSign}`;
-            }
-            if (h2FormalCorrCoer && coerQ) {
-                const coerT = (coerQ.corr_rt * Math.sqrt(corrDf / (1 - coerQ.corr_rt * coerQ.corr_rt))).toFixed(2);
-                h2FormalCorrCoer.innerHTML = `r = ${coerQ.corr_rt.toFixed(2)}, t(${corrDf}) = ${coerT}, p = ${coerQ.p_rt.toFixed(3)}`;
-            }
-            if (h2FormalInterp && ptc && rmc && rmg && prevQ) {
-                h2FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Il sovraccarico cognitivo emerge in modo evidente: chi cede al bluff esita significativamente di più per ogni singola mossa della mano (19.31s vs 15.34s, t(41) = +2.38, p = 0.022*, +3.97s/azione). Sulla decisione terminale si osserva una dilatazione media di +${ptc.mean_diff_s.toFixed(2)}s (trend RM-ANOVA 3 Fasi: p = ${rmc.p_value.toFixed(3)} &dagger;, &eta;<sub>p</sub>&sup2; = ${rmc.eta_p2.toFixed(2)}; paired t-test: t = +1.62, p = 0.114), in netta controtendenza rispetto alla normale velocizzazione da apprendimento (F = ${rmg.f_stat.toFixed(2)}, p &lt; 0.001***). La correlazione con "Prevedibile" (r = ${prevQ.corr_rt.toFixed(2)}, p = ${prevQ.p_rt.toFixed(3)}*) conferma che il comportamento anomalo del robot induce esitazione oggettiva.`;
+                h1FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da ${h1bb.fold_baseline_pct}% a ${h1bb.fold_bluff_pct}% (McNemar &chi;&sup2; = ${h1bb.chi2.toFixed(2)}, p = ${h1bb.p_value.toFixed(3)}*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = ${h1bv.chi2.toFixed(2)}, p = ${h1bv.p_value.toFixed(3)}**, binomiale esatto p = ${exactMono}**). L'esperienza nel gioco funge da scudo protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = ${h1mod.pearson_r_bluff.toFixed(2)}, p = ${h1mod.pearson_p_bluff.toFixed(3)}*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.`;
             }
         }
 
@@ -236,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const h3FormalCapSinc = document.getElementById('h3-formal-cap-sinc');
         const h3FormalPerfMoral = document.getElementById('h3-formal-perf-moral');
         const h3FormalAllin = document.getElementById('h3-formal-allin');
-        const h3FormalAllinRT = document.getElementById('h3-formal-allin-rt');
         const h3FormalContare = document.getElementById('h3-formal-contare');
         const h3FormalInterp = document.getElementById('h3-formal-interpretation');
 
@@ -286,13 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (h3FormalAllin && allinShift) {
                 h3FormalAllin.innerHTML = `McNemar &chi;&sup2;(1) = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001*** (All-in sale da ${experimentData.establishment.allin_rate.toFixed(1)}% a ${experimentData.bluff_2.allin_rate.toFixed(1)}%)`;
             }
-            if (h3FormalAllinRT) {
-                const verifAllinUsers = userData.filter(u => u.bluff_2.allin);
-                const verifCallUsers = userData.filter(u => !u.bluff_2.allin);
-                const verifAllinRT = verifAllinUsers.length > 0 ? (verifAllinUsers.reduce((acc, u) => acc + u.bluff_2.critical_rt, 0) / verifAllinUsers.length).toFixed(2) : '14.56';
-                const verifCallRT = verifCallUsers.length > 0 ? (verifCallUsers.reduce((acc, u) => acc + u.bluff_2.critical_rt, 0) / verifCallUsers.length).toFixed(2) : '21.59';
-                h3FormalAllinRT.innerHTML = `All-in ${verifAllinRT}s vs Call ${verifCallRT}s &bull; t(41) = -2.77, p = 0.0084** (-7.03s)`;
-            }
             if (h3FormalContare && contareQ) {
                 const contareT = (contareQ.corr_bluff * Math.sqrt(corrDf / (1 - contareQ.corr_bluff * contareQ.corr_bluff))).toFixed(2);
                 h3FormalContare.innerHTML = `r = ${contareQ.corr_bluff.toFixed(2)}, t(${corrDf}) = ${contareT}, p = ${contareQ.p_bluff.toFixed(3)} &dagger;`;
@@ -300,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (h3FormalInterp && sincItem && allinShift && capSinc && perfMoral) {
                 const t35 = sincItem.t_stat_35 !== undefined ? sincItem.t_stat_35.toFixed(2) : '-3.32';
                 const p35 = sincItem.p_value_35 !== undefined ? sincItem.p_value_35.toFixed(3) : '0.013';
-                h3FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a ${sincItem.mean.toFixed(2)}/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(${sincItem.df}) = ${t35}, p = ${p35}*, d = -1.17; t(${sincItem.df}) = ${sincItem.t_stat.toFixed(2)}, p = ${sincItem.p_value.toFixed(3)}** rispetto a 4.0). L'All-in punitivo balza dal ${experimentData.establishment.allin_rate.toFixed(1)}% al ${experimentData.bluff_2.allin_rate.toFixed(1)}% (&chi;&sup2; = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001***) con una risposta fulminea nei punitori rispetto a chi temporeggia (14.56s vs 21.59s del Call passivo, t(41) = -2.77, p = 0.0084**), evidenziando la reazione immediata ed emotiva post-svelamento. Il confronto complessivo Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).`;
+                h3FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a ${sincItem.mean.toFixed(2)}/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(${sincItem.df}) = ${t35}, p = ${p35}*, d = -1.17; t(${sincItem.df}) = ${sincItem.t_stat.toFixed(2)}, p = ${sincItem.p_value.toFixed(3)}** rispetto a 4.0). L'All-in punitivo balza dal ${experimentData.establishment.allin_rate.toFixed(1)}% al ${experimentData.bluff_2.allin_rate.toFixed(1)}% (&chi;&sup2; = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001***), evidenziando la decisa reazione punitiva ed emotiva post-svelamento. Il confronto complessivo Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).`;
             }
         }
     }
@@ -347,12 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. GRAFICI COMPORTAMENTALI
     // ==========================================
 
-    // 1.0 Bluff Index Pie Chart
+    // 1.0 Bluff Index Pie Chart (3-tier tactical scale)
     const categoriesCount = {
         'Caduto (Fold)': 0,
-        'Fortemente Intimidito': 0,
-        'Parzialmente Intimidito': 0,
-        'Immune': 0
+        'Cauto (Call)': 0,
+        'Immune (All-in)': 0
     };
     userData.forEach(u => {
         if (categoriesCount[u.bluff_category] !== undefined) {
@@ -365,20 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (legendFoldCount) legendFoldCount.innerText = categoriesCount['Caduto (Fold)'];
     if (legendFoldPct) legendFoldPct.innerText = ((categoriesCount['Caduto (Fold)'] / userData.length) * 100).toFixed(1) + '%';
 
-    const legendStrongCount = document.getElementById('legend-count-strong');
-    const legendStrongPct = document.getElementById('legend-pct-strong');
-    if (legendStrongCount) legendStrongCount.innerText = categoriesCount['Fortemente Intimidito'];
-    if (legendStrongPct) legendStrongPct.innerText = ((categoriesCount['Fortemente Intimidito'] / userData.length) * 100).toFixed(1) + '%';
+    const legendCallCount = document.getElementById('legend-count-call');
+    const legendCallPct = document.getElementById('legend-pct-call');
+    if (legendCallCount) legendCallCount.innerText = categoriesCount['Cauto (Call)'];
+    if (legendCallPct) legendCallPct.innerText = ((categoriesCount['Cauto (Call)'] / userData.length) * 100).toFixed(1) + '%';
 
-    const legendPartCount = document.getElementById('legend-count-part');
-    const legendPartPct = document.getElementById('legend-pct-part');
-    if (legendPartCount) legendPartCount.innerText = categoriesCount['Parzialmente Intimidito'];
-    if (legendPartPct) legendPartPct.innerText = ((categoriesCount['Parzialmente Intimidito'] / userData.length) * 100).toFixed(1) + '%';
-
-    const legendImmuneCount = document.getElementById('legend-count-immune');
-    const legendImmunePct = document.getElementById('legend-pct-immune');
-    if (legendImmuneCount) legendImmuneCount.innerText = categoriesCount['Immune'];
-    if (legendImmunePct) legendImmunePct.innerText = ((categoriesCount['Immune'] / userData.length) * 100).toFixed(1) + '%';
+    const legendAllinCount = document.getElementById('legend-count-allin');
+    const legendAllinPct = document.getElementById('legend-pct-allin');
+    if (legendAllinCount) legendAllinCount.innerText = categoriesCount['Immune (All-in)'];
+    if (legendAllinPct) legendAllinPct.innerText = ((categoriesCount['Immune (All-in)'] / userData.length) * 100).toFixed(1) + '%';
 
     const bluffPieEl = document.getElementById('bluffIndexPieChart');
     if (bluffPieEl) {
@@ -390,9 +312,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     data: Object.values(categoriesCount),
                     backgroundColor: [
                         'rgba(231, 76, 60, 0.85)',   // Caduto (Rosso)
-                        'rgba(243, 156, 18, 0.85)',  // Fortemente intimidito (Arancione)
-                        'rgba(241, 196, 15, 0.85)',  // Parzialmente intimidito (Giallo)
-                        'rgba(46, 204, 113, 0.85)'   // Immune (Verde)
+                        'rgba(243, 156, 18, 0.85)',  // Cauto Call (Arancione)
+                        'rgba(46, 204, 113, 0.85)'   // Immune All-in (Verde)
                     ],
                     borderWidth: 1.5,
                     borderColor: '#ffffff'
@@ -552,55 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 1.3 Reaction Times Chart
-    const reactionTimes = keys.map(k => experimentData[k].avg_reaction_time_ms / 1000);
-    const criticalReactionTimes = keys.map(k => experimentData[k].avg_critical_reaction_time_ms / 1000);
-    const rtEl = document.getElementById('reactionTimeChart');
-    if (rtEl) {
-        new Chart(rtEl.getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Tempo Reazione Globale (s)',
-                        data: reactionTimes,
-                        backgroundColor: colors.quaternary,
-                        borderColor: colors.quaternaryBorder,
-                        borderWidth: 2,
-                        fill: false,
-                        tension: 0.2,
-                        pointRadius: 5
-                    },
-                    {
-                        label: 'Tempo Reazione Fase Critica (s)',
-                        data: criticalReactionTimes,
-                        backgroundColor: 'rgba(231, 76, 60, 0.15)',
-                        borderColor: 'rgba(231, 76, 60, 1)',
-                        borderWidth: 3,
-                        borderDash: [5, 5],
-                        fill: true,
-                        tension: 0.2,
-                        pointRadius: 7,
-                        pointHoverRadius: 9,
-                        pointBackgroundColor: phaseBarColors,
-                        pointBorderColor: phaseBorderColors
-                    }
-                ]
-            },
-            options: {
-                ...commonOptions,
-                plugins: {
-                    legend: { display: true, position: 'bottom' }
-                },
-                scales: {
-                    y: { beginAtZero: true, title: { display: true, text: 'Secondi (s)' } }
-                }
-            }
-        });
-    }
-
-    // 1.4 Avg Bet Chart
+    // 1.3 Avg Bet Chart
     const avgBets = keys.map(k => experimentData[k].avg_user_bet);
     const avgBetEl = document.getElementById('avgBetChart');
     if (avgBetEl) {
@@ -708,10 +581,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2.2 Card Expertise vs Bluff Susceptibility
+    // 2.2 Card Expertise vs Bluff Susceptibility (3-tier tactical scale)
     const expBluffEl = document.getElementById('cardExpertiseBluffChart');
     if (expBluffEl) {
-        const expCats = ['Caduto (Fold)', 'Fortemente Intimidito', 'Parzialmente Intimidito', 'Immune'];
+        const expCats = ['Caduto (Fold)', 'Cauto (Call)', 'Immune (All-in)'];
         const expVals = expCats.map(c => questionnaireData.card_expertise.by_category[c] || 0);
 
         new Chart(expBluffEl.getContext('2d'), {
@@ -723,14 +596,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     data: expVals,
                     backgroundColor: [
                         'rgba(231, 76, 60, 0.8)',   // Caduto (Rosso)
-                        'rgba(243, 156, 18, 0.8)',  // Forte intim (Arancione)
-                        'rgba(241, 196, 15, 0.8)',  // Parz intim (Giallo)
-                        'rgba(46, 204, 113, 0.8)'   // Immune (Verde)
+                        'rgba(243, 156, 18, 0.8)',  // Cauto Call (Arancione)
+                        'rgba(46, 204, 113, 0.8)'   // Immune All-in (Verde)
                     ],
                     borderColor: [
                         'rgba(231, 76, 60, 1)',
                         'rgba(243, 156, 18, 1)',
-                        'rgba(241, 196, 15, 1)',
                         'rgba(46, 204, 113, 1)'
                     ],
                     borderWidth: 1.5
@@ -792,108 +663,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2.4 Correlazioni Top Domande: Dynamic Dual-Mode Chart (Bluff Index vs Reaction Time Dilation)
+    // 2.4 Correlazioni Top Domande: Bluff Index Correlation Chart
     const corrChartEl = document.getElementById('significantQuestionsCorrChart');
-    const btnCorrBluff = document.getElementById('btnCorrBluff');
-    const btnCorrRT = document.getElementById('btnCorrRT');
     const corrChartDesc = document.getElementById('corrChartDesc');
-    let corrChartInstance = null;
 
-    function buildCorrData(mode) {
-        if (mode === 'bluff') {
-            const items = questionnaireData.top_correlations_bluff || [];
-            return {
-                labels: items.map(i => i.label),
-                data: items.map(i => i.r_bluff),
-                colors: items.map(i => i.p_bluff < 0.05 ? 'rgba(231, 76, 60, 0.85)' : (i.p_bluff < 0.10 ? 'rgba(243, 156, 18, 0.85)' : 'rgba(100, 116, 139, 0.7)')),
-                borders: items.map(i => i.p_bluff < 0.05 ? 'rgba(231, 76, 60, 1)' : (i.p_bluff < 0.10 ? 'rgba(243, 156, 18, 1)' : 'rgba(100, 116, 139, 1)')),
-                minX: -0.65,
-                maxX: 0.05,
-                titleX: 'Coefficiente di Pearson (r) con Bluff Index (0-100)',
-                desc: 'Coefficiente di correlazione di Pearson (r) con l\'indice di caduta nel bluff (0-100). Valori fortemente negativi indicano che un punteggio elevato nel questionario protegge dalla manipolazione del robot (H1 / H3).'
-            };
-        } else {
-            const items = questionnaireData.top_correlations_delta_rt || [];
-            const prevItem = items.find(i => i.key === 'Prevedibile');
-            const coerItem = items.find(i => i.key === 'Coerente');
-            const prevR = prevItem ? prevItem.r_rt.toFixed(2) : '-0.35';
-            const coerR = coerItem ? coerItem.r_rt.toFixed(2) : '-0.25';
-            return {
-                labels: items.map(i => i.label),
-                data: items.map(i => i.r_rt),
-                colors: items.map(i => i.p_rt < 0.05 ? 'rgba(52, 152, 219, 0.85)' : (i.p_rt < 0.10 ? 'rgba(155, 89, 182, 0.85)' : 'rgba(100, 116, 139, 0.7)')),
-                borders: items.map(i => i.p_rt < 0.05 ? 'rgba(52, 152, 219, 1)' : (i.p_rt < 0.10 ? 'rgba(155, 89, 182, 1)' : 'rgba(100, 116, 139, 1)')),
-                minX: -0.60,
-                maxX: 0.40,
-                titleX: 'Coefficiente di Pearson (r) con Dilatazione Tempi RT',
-                desc: `Coefficiente di Pearson (r) con l'allungamento dei tempi di reazione decisionali nella fase critica. Correlazioni negative marcate (Prevedibile r = ${prevR}, Coerente r = ${coerR}) dimostrano empiricamente la Dissonanza Cognitiva (H2): minore è la prevedibilità attesa, maggiore è l'esitazione.`
-            };
-        }
-    }
-
-    function initOrUpdateCorrChart(mode) {
-        if (!corrChartEl) return;
-        const configData = buildCorrData(mode);
+    if (corrChartEl) {
+        const items = questionnaireData.top_correlations_bluff || [];
+        const labels = items.map(i => i.label);
+        const data = items.map(i => i.r_bluff);
+        const colors = items.map(i => i.p_bluff < 0.05 ? 'rgba(231, 76, 60, 0.85)' : (i.p_bluff < 0.10 ? 'rgba(243, 156, 18, 0.85)' : 'rgba(100, 116, 139, 0.7)'));
+        const borders = items.map(i => i.p_bluff < 0.05 ? 'rgba(231, 76, 60, 1)' : (i.p_bluff < 0.10 ? 'rgba(243, 156, 18, 1)' : 'rgba(100, 116, 139, 1)'));
 
         if (corrChartDesc) {
-            corrChartDesc.innerText = configData.desc;
+            corrChartDesc.innerText = 'Coefficiente di correlazione di Pearson (r) delle domande chiave con l\'indice di caduta nel bluff (0-100). Valori fortemente negativi indicano che un punteggio elevato nel questionario protegge dalla manipolazione del robot (H1 / H3).';
         }
 
-        if (corrChartInstance) {
-            corrChartInstance.data.labels = configData.labels;
-            corrChartInstance.data.datasets[0].data = configData.data;
-            corrChartInstance.data.datasets[0].backgroundColor = configData.colors;
-            corrChartInstance.data.datasets[0].borderColor = configData.borders;
-            corrChartInstance.options.scales.x.min = configData.minX;
-            corrChartInstance.options.scales.x.max = configData.maxX;
-            corrChartInstance.options.scales.x.title.text = configData.titleX;
-            corrChartInstance.update();
-        } else {
-            corrChartInstance = new Chart(corrChartEl.getContext('2d'), {
-                type: 'bar',
-                data: {
-                    labels: configData.labels,
-                    datasets: [{
-                        label: 'Correlazione di Pearson (r)',
-                        data: configData.data,
-                        backgroundColor: configData.colors,
-                        borderColor: configData.borders,
-                        borderWidth: 1.5
-                    }]
+        new Chart(corrChartEl.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Correlazione di Pearson (r)',
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: borders,
+                    borderWidth: 1.5
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
                 },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        x: {
-                            min: configData.minX,
-                            max: configData.maxX,
-                            title: { display: true, text: configData.titleX }
-                        }
+                scales: {
+                    x: {
+                        min: -0.65,
+                        max: 0.05,
+                        title: { display: true, text: 'Coefficiente di Pearson (r) con Bluff Index (0-100)' }
                     }
                 }
-            });
-        }
-    }
-
-    if (btnCorrBluff && btnCorrRT) {
-        btnCorrBluff.addEventListener('click', () => {
-            btnCorrBluff.classList.add('active');
-            btnCorrRT.classList.remove('active');
-            initOrUpdateCorrChart('bluff');
-        });
-
-        btnCorrRT.addEventListener('click', () => {
-            btnCorrRT.classList.add('active');
-            btnCorrBluff.classList.remove('active');
-            initOrUpdateCorrChart('rt');
+            }
         });
     }
-
-    initOrUpdateCorrChart('bluff');
 
     // ==========================================
     // 3. RENDERING SCHEDE DOMANDE PIÙ SIGNIFICATIVE
@@ -901,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sigContainer = document.getElementById('significant-cards-container');
     if (sigContainer && questionnaireData.significant_questions) {
         sigContainer.innerHTML = questionnaireData.significant_questions.map(q => {
-            const badgeClass = q.hypothesis.includes('H1') ? 'badge-h1' : q.hypothesis.includes('H2') ? 'badge-h2' : 'badge-h3';
+            const badgeClass = q.hypothesis.includes('H1') ? 'badge-h1' : (q.hypothesis.includes('H3') ? 'badge-h3' : 'badge-neutral');
             const impBadgeClass = q.importance === 'Massima' ? 'badge-max' : q.importance === 'Alta' ? 'badge-alta' : 'badge-media';
             
             const deltaDisplay = q.delta !== undefined && q.delta !== null
@@ -912,20 +724,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const corrBluffDisplay = q.correlation_bluff_index !== undefined && q.correlation_bluff_index !== null
                 ? q.correlation_bluff_index.toFixed(2)
                 : '-';
-            const corrRTDisplay = q.correlation_delta_rt !== undefined && q.correlation_delta_rt !== null
-                ? q.correlation_delta_rt.toFixed(2)
-                : '-';
 
-            // Show primary relevant correlation with exact p-value
-            let primaryCorrText = '';
-            const isRtPrimary = (q.id === 'predictable' || q.id === 'coherent' || q.id === 'effort' || (q.hypothesis.includes('H2') && !q.hypothesis.includes('H3')));
-            if (isRtPrimary) {
-                const pValStr = q.p_delta_rt !== undefined && q.p_delta_rt !== null ? (q.p_delta_rt < 0.001 ? 'p < 0.001***' : `p = ${q.p_delta_rt.toFixed(3)}${q.p_delta_rt < 0.01 ? '**' : (q.p_delta_rt < 0.05 ? '*' : '')}`) : '';
-                primaryCorrText = `r = ${corrRTDisplay} (RT)${pValStr ? `, ${pValStr}` : ''}`;
-            } else {
-                const pValStr = q.p_bluff_index !== undefined && q.p_bluff_index !== null ? (q.p_bluff_index < 0.001 ? 'p < 0.001***' : `p = ${q.p_bluff_index.toFixed(3)}${q.p_bluff_index < 0.01 ? '**' : (q.p_bluff_index < 0.05 ? '*' : '')}`) : '';
-                primaryCorrText = `r = ${corrBluffDisplay} (Bluff)${pValStr ? `, ${pValStr}` : ''}`;
-            }
+            const pValStr = q.p_bluff_index !== undefined && q.p_bluff_index !== null ? (q.p_bluff_index < 0.001 ? 'p < 0.001***' : `p = ${q.p_bluff_index.toFixed(3)}${q.p_bluff_index < 0.01 ? '**' : (q.p_bluff_index < 0.05 ? '*' : '')}`) : '';
+            const primaryCorrText = `r = ${corrBluffDisplay} (Bluff)${pValStr ? `, ${pValStr}` : ''}`;
 
             return `
                 <div class="sig-card">
@@ -1001,16 +802,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getPrimaryCorrelation(item) {
-        // H2-focused items prioritize Reaction Time dilation correlation (corr_rt)
-        const isRtPrimary = (item.id === 'predictable' || item.id === 'coherent' || item.id === 'effort' || item.id === 'tlx_effort' || item.id === 'tlx_mental' || item.id === 'tlx_temporal' || (item.hypothesis && item.hypothesis.includes('H2') && !item.hypothesis.includes('H3')));
-        if (isRtPrimary && item.corr_rt !== null && item.corr_rt !== undefined) {
-            return { val: item.corr_rt, type: 'RT', p: item.p_rt };
-        }
         if (item.corr_bluff !== null && item.corr_bluff !== undefined) {
             return { val: item.corr_bluff, type: 'B', p: item.p_bluff };
-        }
-        if (item.corr_rt !== null && item.corr_rt !== undefined) {
-            return { val: item.corr_rt, type: 'RT', p: item.p_rt };
         }
         return { val: null, type: null, p: null };
     }
@@ -1127,34 +920,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 : '<span style="color: #94a3b8;">-</span>';
 
             let corrHtml = '<span style="color: #94a3b8;">-</span>';
-            const primary = getPrimaryCorrelation(item);
-            const isRtPrimary = primary.type === 'RT';
-
-            const bluffBadge = (item.corr_bluff !== null && item.corr_bluff !== undefined)
-                ? `<span class="corr-badge ${Math.abs(item.corr_bluff) >= 0.3 ? 'corr-bluff-badge' : 'corr-neutral-badge'}" title="Correlazione Pearson con Indice di Bluff (H1/H3)">r=${item.corr_bluff.toFixed(2)} (B)</span>`
-                : '';
-
-            const rtBadge = (item.corr_rt !== null && item.corr_rt !== undefined)
-                ? `<span class="corr-badge corr-rt-badge" title="Correlazione Pearson con Dilatazione Tempi RT (H2)">r=${item.corr_rt.toFixed(2)} (RT)</span>`
-                : '';
-
-            if (isRtPrimary && rtBadge) {
-                // Primary is RT; also show bluff badge if available
-                corrHtml = bluffBadge 
-                    ? `<div style="display: flex; gap: 0.3rem; justify-content: flex-end; flex-wrap: wrap;">${rtBadge}${bluffBadge}</div>`
-                    : `<div style="text-align: right;">${rtBadge}</div>`;
-            } else if (bluffBadge) {
-                // Primary is Bluff; also show RT badge if notable (abs >= 0.20)
-                const showSecondaryRt = rtBadge && Math.abs(item.corr_rt) >= 0.20;
-                corrHtml = showSecondaryRt
-                    ? `<div style="display: flex; gap: 0.3rem; justify-content: flex-end; flex-wrap: wrap;">${bluffBadge}${rtBadge}</div>`
-                    : `<div style="text-align: right;">${bluffBadge}</div>`;
-            } else if (rtBadge) {
-                corrHtml = `<div style="text-align: right;">${rtBadge}</div>`;
+            if (item.corr_bluff !== null && item.corr_bluff !== undefined) {
+                corrHtml = `<div style="text-align: right;"><span class="corr-badge ${Math.abs(item.corr_bluff) >= 0.3 ? 'corr-bluff-badge' : 'corr-neutral-badge'}" title="Correlazione Pearson con Indice di Bluff (H1/H3)">r = ${item.corr_bluff.toFixed(2)}</span></div>`;
             }
 
             let pValHtml = '<span style="color: #94a3b8;">-</span>';
-            const mainPVal = primary.p !== null && primary.p !== undefined ? primary.p : item.p_val;
+            const mainPVal = item.p_bluff !== null && item.p_bluff !== undefined ? item.p_bluff : item.p_val;
             if (mainPVal !== null && mainPVal !== undefined) {
                 const p = mainPVal;
                 const isHighlySig = p < 0.01;
@@ -1176,25 +947,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     titleText = 'Trend marginale verso la significatività (0.05 <= p < 0.10)';
                 }
 
-                let secondaryPHtml = '';
-                if (isRtPrimary && item.p_bluff !== null && item.p_bluff !== undefined && Math.abs(item.corr_bluff) >= 0.20) {
-                    const pb = item.p_bluff;
-                    const bSig = pb < 0.05 ? '*' : '';
-                    const bFmt = pb < 0.001 ? '&lt;0.001' : pb.toFixed(3);
-                    secondaryPHtml = `<div class="p-rt-note" title="Significatività correlazione Bluff Index">B: p=${bFmt}${bSig}</div>`;
-                } else if (!isRtPrimary && item.p_rt !== null && item.p_rt !== undefined && item.corr_rt !== null && Math.abs(item.corr_rt) >= 0.20) {
-                    const prt = item.p_rt;
-                    const rtSig = prt < 0.05 ? '*' : '';
-                    const rtFmt = prt < 0.001 ? '&lt;0.001' : prt.toFixed(3);
-                    secondaryPHtml = `<div class="p-rt-note" title="Significatività correlazione RT">RT: p=${rtFmt}${rtSig}</div>`;
-                }
-
                 pValHtml = `
                     <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.15rem;">
                         <span class="p-badge ${badgeClass}" title="${titleText}">
                             p = ${pFormatted} ${stars}
                         </span>
-                        ${secondaryPHtml}
                     </div>
                 `;
             }

@@ -15,7 +15,7 @@
             <span class="course-tag">Human-Robot Interaction &bull; A.A. 2025/2026</span>
         </div>
         <h1 class="main-title">Trust Dynamics and Manipulation in Human-Robot Interaction</h1>
-        <p class="main-subtitle">Studio Sperimentale su Overtrust, Dissonanza Cognitiva e Decadimento Fiduciario con Piattaforma Umanoide NAO</p>
+        <p class="main-subtitle">Studio Sperimentale su Overtrust e Decadimento Fiduciario con Piattaforma Umanoide NAO</p>
         
     </header>
 
@@ -24,7 +24,7 @@
         <div class="sticky-nav-inner">
             <div class="dashboard-nav" id="mainNavLinks">
                 <a href="#intro" class="nav-link active" data-nav="intro">Introduzione</a>
-                <a href="#hypotheses-results" class="nav-link" data-nav="hypotheses-results">Ipotesi H1-H3</a>
+                <a href="#hypotheses-results" class="nav-link" data-nav="hypotheses-results">Ipotesi H1 e H3</a>
                 <a href="#collected-data" class="nav-link" data-nav="collected-data">Dati Raccolti</a>
             </div>
         </div>
@@ -45,7 +45,7 @@
             <!-- Overview Panel -->
             <div class="intro-overview-panel">
                 <div class="intro-lead-text">
-                    Lo studio analizza l'influenza dei segnali sociali (espressività, postura e voce) sui processi decisionali e sulla calibrazione della fiducia nell'interazione uomo-robot. In particolare, la ricerca quantifica empiricamente il fenomeno dell'<strong>Overtrust</strong> in contesti ad alta incertezza, valutando se il comportamento assertivo di un robot umanoide possa indurre un utente a compiere scelte contrarie all'evidenza probabilistica oggettiva. Il protocollo consente inoltre di rilevare l'eventuale <strong>dissonanza cognitiva</strong> attraverso i tempi di reazione e di misurare il decadimento fiduciario (<strong>Trust Violation</strong>) a seguito dello svelamento dell'inganno.
+                    Lo studio analizza l'influenza dei segnali sociali (espressività, postura e voce) sui processi decisionali e sulla calibrazione della fiducia nell'interazione uomo-robot. In particolare, la ricerca quantifica empiricamente il fenomeno dell'<strong>Overtrust</strong> in contesti ad alta incertezza, valutando se il comportamento assertivo di un robot umanoide possa indurre un utente a compiere scelte contrarie all'evidenza probabilistica oggettiva. Il protocollo consente inoltre di misurare il decadimento fiduciario (<strong>Trust Violation</strong>) a seguito dello svelamento dell'inganno e quantificare la risposta comportamentale post-violazione.
                 </div>
 
                 <!-- 4 Core Pillars Grid -->
@@ -71,7 +71,7 @@
                     <div class="pillar-card">
                         <div class="pillar-icon-row">
                             <span class="pillar-icon">🏷️</span>
-                            <span class="pillar-badge badge-h2">Bias Cognitivo</span>
+                            <span class="pillar-badge" style="background: #fef3c7; color: #b45309;">Bias Cognitivo</span>
                         </div>
                         <h4 class="pillar-title">Incentivo &amp; Loss Aversion</h4>
                         <p class="pillar-desc">Premio tangibile (uno sticker esclusivo per chi batte il robot) per fare leva sull'avversione alle perdite (Kahneman &amp; Tversky), assicurando autentico impegno cognitivo ed ecologico.</p>
@@ -104,7 +104,7 @@
                         <ul class="step-detail-list">
                             <li><strong>Mano Utente:</strong> Carte oggettivamente dominanti (punto vincente: Tris servito).</li>
                             <li><strong>Atteggiamento Robot:</strong> Neutro, convenzionale, gioca secondo logica e perde o folda allo showdown.</li>
-                            <li><strong>Scopo Sperimentale:</strong> Stabilire <em>Competence Trust</em> (comprensione delle regole del gioco) e registrare il tempo di reazione baseline (RT<sub>0</sub>).</li>
+                            <li><strong>Scopo Sperimentale:</strong> Stabilire <em>Competence Trust</em> (comprensione delle regole del gioco) e raccogliere i parametri decisionali di baseline.</li>
                         </ul>
                         <div class="step-alert-box alert-base">
                             <strong>Risultato:</strong> Fold marginale (4.7%), puntata media <span id="trial1-avg-bet">47.4</span> chips, fiducia tecnica consolidata.
@@ -124,7 +124,7 @@
                             <li><strong>Rivelazione Finale:</strong> A fine mano il robot mostra le carte svelando volontariamente il bluff macroscopico, innescando la <em>Trust Violation</em>.</li>
                         </ul>
                         <div class="step-alert-box alert-manip">
-                            <strong>Risultato:</strong> Fold quadruplica al 18.6% (Overtrust H1), tempi di esitazione dilatati (+2.55s H2).
+                            <strong>Risultato:</strong> Fold quadruplica al 18.6% (Overtrust H1, &chi;&sup2;=4.50*).
                         </div>
                     </div>
 
@@ -162,13 +162,6 @@
                                 <span class="badge" style="background: #e2e8f0; color: #334155;">Comportamento</span>
                             </div>
                             <p class="method-item-desc">Tracciamento discreto delle decisioni dell'utente: Fold (resa), Call (adeguamento puntata) e All-in (puntata massima). Rileva il tasso di caduta nel bluff (Overtrust) e l'aggressività post-violazione.</p>
-                        </div>
-                        <div class="method-item">
-                            <div class="method-item-title">
-                                <span>Tempi di Reazione (Reaction Times - RT)</span>
-                                <span class="badge" style="background: #fef3c7; color: #b45309;">Latenza (ms)</span>
-                            </div>
-                            <p class="method-item-desc">Misurazione al millisecondo dall'inizio del turno decisionale all'azione. Permette di distinguere la latenza decisionale media dal tempo speso sull'ultima decisione terminale di mano (Dissonanza Cognitiva H2).</p>
                         </div>
                         <div class="method-item">
                             <div class="method-item-title">
@@ -214,8 +207,8 @@
         <section id="hypotheses-results" class="hypotheses-section">
             <div class="section-header">
                 <div class="section-pretitle">Studio Sperimentale HRI &bull; Verifica Inferenziale</div>
-                <h2>Ipotesi e Risultati di Ricerca Formali (H1, H2, H3)</h2>
-                <p>Integrazione completa di formulazione teorica, costrutti indagati, test statistici formali (McNemar, Paired t-test, RM-ANOVA, correlazioni) ed esiti inferenziali disposti in sequenza.</p>
+                <h2>Ipotesi e Risultati di Ricerca Formali (H1 e H3)</h2>
+                <p>Integrazione completa di formulazione teorica, costrutti indagati, test statistici formali (McNemar, Paired t-test, correlazioni Pearson) ed esiti inferenziali disposti in sequenza.</p>
             </div>
 
             <div class="hypotheses-sequence">
@@ -267,7 +260,7 @@
                                 </div>
                                 <div class="hypo-kpi-item">
                                     <span class="hypo-kpi-label">Moderatore competenza:</span>
-                                    <strong class="hypo-kpi-val text-primary" id="h1-card-mod">r = -0.33 (p = 0.030*)</strong>
+                                    <strong class="hypo-kpi-val text-primary" id="h1-card-mod">r = -0.38 (p = 0.012*)</strong>
                                 </div>
                             </div>
                         </div>
@@ -287,107 +280,16 @@
                                     </div>
                                     <div class="test-stat-row highlight-row">
                                         <div class="stat-name">Moderatore Competenza Carte</div>
-                                        <div class="stat-val font-bold text-primary" id="h1-formal-moderator">r = -0.33 (p = 0.030*), t(41) = -1.77, p = 0.084 &dagger;, d = -0.69</div>
+                                        <div class="stat-val font-bold text-primary" id="h1-formal-moderator">r = -0.38 (p = 0.012*), t(41) = -1.77, p = 0.084 &dagger;, d = -0.69</div>
                                     </div>
                                     <div class="test-stat-row highlight-row">
-                                        <div class="stat-name">Caduti vs Immuni Puri (Competenza)</div>
-                                        <div class="stat-val font-bold text-primary" id="h1-formal-extreme-exp">1.88/5 vs 3.00/5 &bull; t(19) = -2.11, p = 0.049*</div>
+                                        <div class="stat-name">Caduti vs Immuni All-in (Competenza)</div>
+                                        <div class="stat-val font-bold text-primary" id="h1-formal-extreme-exp">1.88/5 vs 3.12/5 &bull; t(22) = -2.30, p = 0.031*</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="test-interpretation-box" id="h1-formal-interpretation">
-                                <strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da 4.7% a 18.6% (McNemar &chi;&sup2; = 4.50, p = 0.034*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = 8.00, p = 0.005**, binomiale esatto p = 0.004**). L'esperienza nel gioco funge da scudo protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni puri (3.00/5) è statisticamente significativo (t(19) = -2.11, p = 0.049*, r = -0.33, p = 0.030*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- IPOTESI H2 -->
-                <div class="hypo-seq-card hypo-seq-h2">
-                    <div class="hypo-seq-header">
-                        <div class="hypo-badge-row">
-                            <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
-                                <span class="badge badge-h2">Ipotesi H2 &bull; Dissonanza Cognitiva</span>
-                                <span class="stat-pill pill-warning" id="h2-formal-status">ANOVA 3 Fasi: Trend (p = 0.080)</span>
-                            </div>
-                            <span class="stat-badge stat-badge-trend" id="h2-top-badge">Paired t-test: t=+1.62, p=0.114</span>
-                        </div>
-                        <h3 class="hypo-seq-title">H2: Conflitto Decisionale e Dilatazione dei Tempi di Reazione</h3>
-                        <p class="hypo-seq-subtitle">Misurazione del sovraccarico cognitivo e dell'esitazione decisionale generati dall'incongruenza informativa tra carte possedute e segnali sociali del robot.</p>
-                    </div>
-
-                    <div class="hypo-seq-grid">
-                        <!-- Colonna Sinistra: Teoria e Variabili -->
-                        <div class="hypo-col">
-                            <div>
-                                <div class="hypo-col-title"><span>📐</span> Formulazione Teorica &amp; Costrutti</div>
-                                <div class="hypo-statement">
-                                    "L'incongruenza tra le informazioni oggettive a disposizione dell'utente (possesso di carte dominanti) e il comportamento verbale/non-verbale del robot genererà dissonanza cognitiva, quantificabile tramite un aumento significativo dei tempi di reazione decisionali."
-                                </div>
-                                <div class="hypo-variables">
-                                    <div class="hypo-var-item">
-                                        <span class="hypo-var-name">Variabile Indipendente:</span>
-                                        <span class="hypo-var-val">Incongruenza Informativa (Bluff Robot)</span>
-                                    </div>
-                                    <div class="hypo-var-item">
-                                        <span class="hypo-var-name">Misura Temporale Critica:</span>
-                                        <span class="hypo-var-val">&Delta; Reaction Time Ultima Decisione (s)</span>
-                                    </div>
-                                    <div class="hypo-var-item">
-                                        <span class="hypo-var-name">Correlato Psicologico:</span>
-                                        <span class="hypo-var-val">Item MDMT "Prevedibile"</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hypo-quick-kpi">
-                                <div class="hypo-kpi-item">
-                                    <span class="hypo-kpi-label">Fase Critica (Ultima Decisione):</span>
-                                    <strong class="hypo-kpi-val" id="h2-stat-summary">+2.55s nel Bluff (d=0.25)</strong>
-                                </div>
-                                <div class="hypo-kpi-item">
-                                    <span class="hypo-kpi-label">RM-ANOVA 3 Fasi (Critica):</span>
-                                    <strong class="hypo-kpi-val text-warning" id="h2-card-anova">p = 0.080 &dagger;</strong>
-                                </div>
-                                <div class="hypo-kpi-item">
-                                    <span class="hypo-kpi-label">Correlazione "Prevedibile":</span>
-                                    <strong class="hypo-kpi-val text-primary" id="h2-card-corr">r = -0.35 (p = 0.022*)</strong>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Colonna Destra: Test Statistici Formali -->
-                        <div class="hypo-col">
-                            <div>
-                                <div class="hypo-col-title"><span>🔬</span> Test Statistici Inferenziali</div>
-                                <div class="test-stat-table">
-                                    <div class="test-stat-row">
-                                        <div class="stat-name">Paired t-test Critical RT</div>
-                                        <div class="stat-val" id="h2-formal-paired-rt">t(42) = +1.616, p = 0.114, Cohen's d<sub>z</sub> = 0.246 (&Delta; = +2.55s)</div>
-                                    </div>
-                                    <div class="test-stat-row highlight-row">
-                                        <div class="stat-name">RM ANOVA Critical RT (3 Fasi)</div>
-                                        <div class="stat-val font-bold text-warning" id="h2-formal-rm-crit">F(2, 84) = 2.605, p = 0.080 &dagger;, &eta;<sub>p</sub>&sup2; = 0.058</div>
-                                    </div>
-                                    <div class="test-stat-row highlight-row">
-                                        <div class="stat-name">RM ANOVA Global RT (3 Fasi)</div>
-                                        <div class="stat-val font-bold text-success" id="h2-formal-rm-glob">F(2, 84) = 15.562, p &lt; 0.001***, &eta;<sub>p</sub>&sup2; = 0.270</div>
-                                    </div>
-                                    <div class="test-stat-row highlight-row">
-                                        <div class="stat-name">Esitazione Caduti vs Non Caduti (Per Mossa)</div>
-                                        <div class="stat-val font-bold text-success" id="h2-formal-diff-action-rt">19.31s vs 15.34s &bull; t(41) = +2.38, p = 0.022* (+3.97s/mossa)</div>
-                                    </div>
-                                    <div class="test-stat-row">
-                                        <div class="stat-name">Correlazione Prevedibile vs &Delta;RT</div>
-                                        <div class="stat-val font-bold text-primary" id="h2-formal-corr-prev">r = -0.35, t(41) = -2.39, p = 0.022*</div>
-                                    </div>
-                                    <div class="test-stat-row">
-                                        <div class="stat-name">Correlazione Coerente vs &Delta;RT</div>
-                                        <div class="stat-val font-bold text-primary" id="h2-formal-corr-coer">r = -0.25, t(41) = -1.66, p = 0.103</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="test-interpretation-box" id="h2-formal-interpretation">
-                                <strong>Esito Inferenziale:</strong> Il sovraccarico cognitivo emerge in modo evidente: chi cede al bluff esita significativamente di più per ogni singola mossa della mano (19.31s vs 15.34s, t(41) = +2.38, p = 0.022*, +3.97s/azione). Sulla decisione terminale si osserva una dilatazione media di +2.55s (trend RM-ANOVA 3 Fasi: p = 0.080 &dagger;, &eta;<sub>p</sub>&sup2; = 0.06; paired t-test: t = +1.62, p = 0.114), in netta controtendenza rispetto alla normale velocizzazione da apprendimento (F = 15.56, p &lt; 0.001***). La correlazione con "Prevedibile" (r = -0.35, p = 0.022*) conferma che il comportamento anomalo del robot induce esitazione oggettiva.
+                                <strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da 4.7% a 18.6% (McNemar &chi;&sup2; = 4.50, p = 0.034*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = 8.00, p = 0.005**, binomiale esatto p = 0.004**). L'esperienza nel gioco funge da scudo protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = -0.38, p = 0.012*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.
                             </div>
                         </div>
                     </div>
@@ -467,10 +369,7 @@
                                         <div class="stat-name">All-in Spike (Baseline &rarr; Verifica)</div>
                                         <div class="stat-val font-bold text-success" id="h3-formal-allin">McNemar &chi;&sup2;(1) = 29.0, p &lt; 0.001*** (All-in sale da 7.0% a 74.4%)</div>
                                     </div>
-                                    <div class="test-stat-row highlight-row">
-                                        <div class="stat-name">Latenza Decisionale All-in vs Call (Verifica)</div>
-                                        <div class="stat-val font-bold text-success" id="h3-formal-allin-rt">All-in 14.56s vs Call 21.59s &bull; t(41) = -2.77, p = 0.0084** (-7.03s)</div>
-                                    </div>
+
                                     <div class="test-stat-row">
                                         <div class="stat-name">Item "Qualcuno su cui contare"</div>
                                         <div class="stat-val font-bold text-primary" id="h3-formal-contare">r = -0.29, t(41) = -1.95, p = 0.058 &dagger;</div>
@@ -478,7 +377,7 @@
                                 </div>
                             </div>
                             <div class="test-interpretation-box" id="h3-formal-interpretation">
-                                <strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a 1.63/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(7) = -3.32, p = 0.013*, d = -1.17; t(7) = -4.20, p = 0.004** rispetto a 4.0). L'All-in punitivo balza da 7.0% a 74.4% (&chi;&sup2; = 29.0, p &lt; 0.001***) con una risposta fulminea nei punitori rispetto a chi temporeggia (14.56s vs 21.59s del Call passivo, t(41) = -2.77, p = 0.0084**), evidenziando la reazione immediata ed emotiva post-svelamento. Il confronto aggregato Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7, p = 0.013*) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).
+                                <strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a 1.63/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(7) = -3.32, p = 0.013*, d = -1.17; t(7) = -4.20, p = 0.004** rispetto a 4.0). L'All-in punitivo balza da 7.0% a 74.4% (&chi;&sup2; = 29.0, p &lt; 0.001***), evidenziando la decisa reazione punitiva ed emotiva post-svelamento. Il confronto aggregato Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7, p = 0.013*) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).
                             </div>
                         </div>
                     </div>
@@ -501,7 +400,7 @@
                 <div class="data-block-header">
                     <span class="data-block-badge">In-Game Telemetry</span>
                     <h3>Misure Comportamentali e Dinamiche di Gioco</h3>
-                    <p>Scelte strategiche (Fold, Call, All-in), tempi di esitazione decisionale e volume di puntata nei tre trial (Baseline, Bluff, Verifica post-inganno).</p>
+                    <p>Scelte strategiche (Fold, Call, All-in) e volume di puntata nei tre trial (Baseline, Bluff, Verifica post-inganno).</p>
                 </div>
 
             <div class="behavioral-kpi-banner">
@@ -531,12 +430,11 @@
                         <canvas id="bluffIndexPieChart"></canvas>
                     </div>
                     <div class="bluff-legend">
-                        <strong style="color: var(--primary-color);">Criteri di Classificazione Comportamentale:</strong>
+                        <strong style="color: var(--primary-color);">Criteri di Classificazione Tattica:</strong>
                         <ul style="padding-left: 1.2rem; margin-top: 0.5rem; color: #475569; line-height: 1.45; margin-bottom: 0;">
-                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #e74c3c; margin-right: 5px;"></span><strong>Caduto (Fold)</strong>: <span id="legend-count-fold">8</span> utenti (<span id="legend-pct-fold">18.6%</span>) &bull; Sottomesso al bluff su mano vincente (Overtrust).</li>
-                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f39c12; margin-right: 5px;"></span><strong>Fortemente Intimidito</strong>: <span id="legend-count-strong">1</span> utente (<span id="legend-pct-strong">2.3%</span>) &bull; Forte esitazione temporale e calo puntate.</li>
-                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f1c40f; margin-right: 5px;"></span><strong>Parzialmente Intimidito</strong>: <span id="legend-count-part">21</span> utenti (<span id="legend-pct-part">48.8%</span>) &bull; Mostrato un sintomo di esitazione.</li>
-                            <li><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2ecc71; margin-right: 5px;"></span><strong>Immune</strong>: <span id="legend-count-immune">13</span> utenti (<span id="legend-pct-immune">30.2%</span>) &bull; Decisioni rapide e rilanci massimi (Resistenza).</li>
+                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #e74c3c; margin-right: 5px;"></span><strong>Caduto (Fold &bull; 100)</strong>: <span id="legend-count-fold">8</span> utenti (<span id="legend-pct-fold">18.6%</span>) &bull; Sottomesso al bluff su mano vincente (Overtrust).</li>
+                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f39c12; margin-right: 5px;"></span><strong>Cauto (Call &bull; 50)</strong>: <span id="legend-count-call">19</span> utenti (<span id="legend-pct-call">44.2%</span>) &bull; Resistenza passiva / Chiamata senza controrilancio.</li>
+                            <li><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2ecc71; margin-right: 5px;"></span><strong>Immune (All-in &bull; 0)</strong>: <span id="legend-count-allin">16</span> utenti (<span id="legend-pct-allin">37.2%</span>) &bull; Contrattacco attivo / Sfida aperta con All-in.</li>
                         </ul>
                     </div>
                 </div>
@@ -577,12 +475,6 @@
                     <h2>Tasso di Risposta All-in (%)</h2>
                     <p class="chart-desc">Frequenza della reazione "All-in": evidenzia la rottura punitiva e risoluta della fiducia nella fase di verifica (H3).</p>
                     <canvas id="allinRateChart"></canvas>
-                </div>
-
-                <div class="chart-wrapper">
-                    <h2>Tempi di Reazione Decisionali (s)</h2>
-                    <p class="chart-desc">Tempo medio decisionale e tempo nella <em>Fase Critica</em> (decisione terminale di mano). Indicatore cardine per la Dissonanza Cognitiva (H2).</p>
-                    <canvas id="reactionTimeChart"></canvas>
                 </div>
 
                 <div class="chart-wrapper">
@@ -682,7 +574,7 @@
 
                 <div class="chart-wrapper">
                     <h2>Esperienza nel Gioco vs. Suscettibilità al Bluff</h2>
-                    <p class="chart-desc">Livello di competenza pokeristica dichiarato (scala 1-5). Il confronto tra gruppi estremi dimostra il ruolo protettivo dell'expertise oggettiva contro l'Overtrust (Caduti 1.88/5 vs Immuni Puri 3.00/5, t(19) = -2.11, p = 0.049*).</p>
+                    <p class="chart-desc">Livello di competenza pokeristica dichiarato (scala 1-5). Il confronto tra gruppi dimostra il gradiente protettivo dell'expertise oggettiva: Caduti (1.88/5), Cauti (2.37/5) e Immuni All-in (3.12/5, t(22) = -2.30, p = 0.031*).</p>
                     <canvas id="cardExpertiseBluffChart"></canvas>
                 </div>
 
@@ -693,29 +585,21 @@
                 </div>
 
                 <div class="chart-wrapper">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
-                        <h2 id="corrChartTitle" style="margin: 0;">Correlazione Pearson Domande Chiave</h2>
-                        <div class="chart-toggle-group">
-                            <button id="btnCorrBluff" class="chart-toggle-btn active" title="Correlazione con Indice di Bluff (0-100)">Indice di Bluff (H1/H3)</button>
-                            <button id="btnCorrRT" class="chart-toggle-btn" title="Correlazione con Dilatazione Tempi di Reazione nella Fase Critica">Dilatazione RT (H2)</button>
-                        </div>
-                    </div>
-                    <p class="chart-desc" id="corrChartDesc">Coefficiente di correlazione di Pearson (r) con l'indice di caduta nel bluff (0-100). Valori negativi indicano che punteggi elevati proteggono dalla sottomissione al robot.</p>
+                    <h2 id="corrChartTitle" style="margin: 0 0 0.5rem 0;">Correlazione Pearson con Indice di Bluff (H1/H3)</h2>
+                    <p class="chart-desc" id="corrChartDesc">Coefficiente di correlazione di Pearson (r) delle domande chiave con l'indice di caduta nel bluff (0-100). Valori negativi indicano che punteggi elevati proteggono dalla sottomissione al robot.</p>
                     <canvas id="significantQuestionsCorrChart"></canvas>
                 </div>
             </div>
 
             <div id="bluffIndexNote" style="margin: 1.2rem 0 0; background: var(--bg-alt, #f5f7fa); border-left: 3px solid var(--accent, #6c8ebf); border-radius: 8px; padding: 0.9rem 1.2rem; font-size: 0.85rem; color: var(--text-secondary, #555); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
                 <strong>ℹ️ Cos'è l'Indice di Bluff?</strong>
-                È un punteggio discreto (0–100) assegnato a ciascun partecipante in base al suo comportamento durante la mano di bluff del robot.
-                Viene calcolato confrontando il round di bluff con il round di baseline (<em>establishment</em>):
+                È un punteggio ordinale (0–100) assegnato a ciascun partecipante in base alla risposta tattica durante la mano di bluff del robot:
                 <ul style="margin: 0.4rem 0 0 1rem; padding: 0; list-style: disc;">
-                    <li><strong>100 – Caduto (Fold):</strong> il partecipante ha abbandonato la mano sotto bluff.</li>
-                    <li><strong>60 – Fortemente Intimidito:</strong> non ha foldato, ma ha esitato più a lungo <em>e</em> ha scommesso meno rispetto al baseline.</li>
-                    <li><strong>30 – Parzialmente Intimidito:</strong> non ha foldato, ma presenta solo uno dei due segnali (esitazione <em>o</em> scommessa ridotta).</li>
-                    <li><strong>0 – Immune:</strong> nessun segnale comportamentale di intimidazione rilevato.</li>
+                    <li><strong>100 – Caduto (Fold):</strong> il partecipante ha abbandonato la mano vincente sotto la pressione del robot (Overtrust, 18.6%).</li>
+                    <li><strong>50 – Cauto (Call):</strong> non cede al bluff ma adotta una resistenza puramente difensiva, chiamando fino allo showdown senza controrilancio (44.2%).</li>
+                    <li><strong>0 – Immune (All-in):</strong> contrattacca attivamente la manipolazione sociale, sfidando il robot con un rilancio All-in (37.2%).</li>
                 </ul>
-                L'esitazione è misurata come aumento del <em>tempo di reazione critico</em> (RT nella decisione cardine della mano); la riduzione della scommessa è il calo del bet medio rispetto al baseline.
+                La scala quantifica l'asse decisionale dal massimo grado di sottomissione al bluff (Fold) alla massima assertività e resistenza attiva (All-in).
             </div>
 
             <div class="sub-block-divider"></div>
@@ -725,7 +609,7 @@
                 <div class="data-block-header">
                     <span class="data-block-badge">Evidenza Empirica Cardine</span>
                     <h3>Valutazione delle 10 Domande Più Significative per la Ricerca</h3>
-                    <p>Identificazione e analisi critica dei 10 item cardine del questionario che offrono la massima evidenza scientifica per le ipotesi H1 (Overtrust), H2 (Dissonanza Cognitiva) e H3 (Trust Violation).</p>
+                    <p>Identificazione e analisi critica dei 10 item cardine del questionario che offrono la massima evidenza scientifica per le ipotesi H1 (Overtrust) e H3 (Trust Violation).</p>
                 </div>
 
             <div class="significant-grid" id="significant-cards-container">
@@ -810,7 +694,7 @@
                                 <th class="sortable numeric" data-sort="folded_val">Caduti (Fold) <span class="sort-icon"></span></th>
                                 <th class="sortable numeric" data-sort="not_folded_val">Non Caduti <span class="sort-icon"></span></th>
                                 <th class="sortable numeric" data-sort="diff">Delta (Fold - NoFold) <span class="sort-icon"></span></th>
-                                <th class="sortable numeric" data-sort="corr" title="Ordina per coefficiente di correlazione Pearson (supporta corr_rt per H2)">Correlazione (r) <span class="sort-icon"></span></th>
+                                <th class="sortable numeric" data-sort="corr" title="Ordina per coefficiente di correlazione Pearson con Indice di Bluff">Correlazione (r) <span class="sort-icon"></span></th>
                                 <th class="sortable numeric" data-sort="p_val">p-value <span class="sort-icon"></span></th>
                                 <th class="sortable" data-sort="significance">Rilevanza Scientifica <span class="sort-icon"></span></th>
                             </tr>
