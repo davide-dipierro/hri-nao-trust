@@ -1,0 +1,183 @@
+# Proposta di Progetto: Valutazione dell'Adattamento Comportamentale e della Fiducia in Contesti Competitivi
+## Trust Dynamics and Manipulation in Human-Robot Interaction
+
+**Autori:** Davide Di Pierro (DE5000001) – Fabrizio Quaranta (DE5000029)  
+**Ambito Accademico:** Corso di Human-Robot Interaction (HRI)  
+**Piattaforma Sperimentale:** Robot Umanoide NAO (SoftBank Robotics)  
+
+---
+
+## 1. Introduzione, Motivazione e Quadro Teorico
+
+L'integrazione di agenti robotici sociali in contesti decisionali complessi e ad alta incertezza solleva interrogativi cruciali sulla calibrazione della fiducia tra esseri umani e macchine. L'antropomorfismo e l'impiego di segnali sociali multimodali (prosodia vocale, gestualità cinesica, contatto visivo e feedback cromatico dei LED) esercitano un forte impatto sulla percezione dell'utente, inducendo spesso una tendenza ad attribuire al robot intenzionalità, competenza e affidabilità superiori a quelle reali.
+
+Il presente progetto indaga empiricamente il fenomeno dell'**Overtrust** (eccesso ingiustificato di fiducia) e la suscettibilità alla manipolazione sociale in uno scenario competitivo 1 contro 1. Nello specifico, lo studio esplora se e in che misura un robot umanoide autonomo possa sfruttare segnali sociali ingannevoli e assertivi per indurre un decisore umano a compiere scelte irrazionali, contrarie all'evidenza logico-probabilistica a propria disposizione. Inoltre, il protocollo analizza i meccanismi di **Trust Violation** (violazione della fiducia) innescati dallo svelamento volontario dell'inganno e la conseguente risposta comportamentale e psicologica post-violazione (*Trust Repair* vs *Risposta Punitiva*).
+
+### Research Question
+> *"In che modo i segnali sociali assertivi ed espressivi di un robot umanoide (NAO) influenzano i processi decisionali, il carico cognitivo e la calibrazione della fiducia (Overtrust e Trust Violation) dell'utente in un contesto competitivo ad alta incertezza?"*
+
+### Stato dell'Arte e Letteratura di Riferimento
+La progettazione teorica e metodologica del lavoro si inserisce nel solco dei contributi cardine della letteratura HRI:
+* **Salem et al. (2015)**, *Would You Trust a (Faulty) Robot?* (ACM/IEEE HRI): analisi dell'Overtrust verso robot con performance imperfette e della difficoltà umana a disancorarsi dalla fiducia pregressa.
+* **Short et al. (2010)**, *No Fair!! An Interaction with a Cheating Robot* (IEEE RO-MAN): valutazione delle reazioni emotive, cognitive e relazionali di fronte a comportamenti scorretti o ingannevoli messi in atto da un robot sociale.
+* **Rossi & Rossi (2023)**, *Evaluating People’s Perception of Trust of a Deceptive Robot with Theory of Mind in an Assistive Gaming Scenario* (IEEE RO-MAN): indagine sull'inganno deliberato, attribuzione di Teoria della Mente e dissociazione percettiva nell'interazione uomo-macchina.
+* **Kim & Suzuki (2011)**, *Analysis of Bluffing Behavior in Human-Humanoid Poker Game* (LNAI/ICSR): studio pionieristico sulle dinamiche di bluff e lettura dei segnali non verbali tra giocatori umani e umanoidi in scenari di gioco a carte competitivo.
+
+---
+
+## 2. Ipotesi di Ricerca Formali
+
+Lo studio è strutturato attorno a due ipotesi di ricerca inferenziali primarie, integrate dal monitoraggio esplorativo continuo delle dinamiche decisionali e cognitive:
+
+* **H1 (Overtrust, Manipolazione Assertiva e Ruolo Moderatore dell'Expertise):**  
+  L'esibizione di comportamenti assertivi, esultanti e segnali sociali verbali/non-verbali di sicurezza da parte del robot indurrà una percentuale statisticamente significativa di partecipanti a compiere errori decisionali controintuitivi, ovvero ad abbandonare la contesa (*Fold*) nonostante siano in possesso di una combinazione di carte oggettivamente e statisticamente vincente, attestando una condizione di Overtrust.  
+  *Ipotesi di moderazione correlata:* L'esperienza pregressa dell'utente nel gioco di carte/poker agirà come scudo protettivo (moderatore negativo), riducendo significativamente la suscettibilità alla manipolazione sociale della macchina.
+
+* **H2 (Trust Violation, Dissociazione della Fiducia Morale e Risposta Punitiva):**  
+  Una volta svelato volontariamente l'inganno da parte del robot al termine della mano critica, il patto fiduciario morale (*Moral Trust*, specificamente la sottoscala della *Sincerità*) subirà un crollo drastico e selettivo rispetto alla percezione delle competenze tecniche del robot (*Performance Trust*), che rimarranno sostanzialmente stabili. Di conseguenza, in una successiva interazione identica, l'utente manifesterà un netto rigetto della manipolazione, traducendosi in un azzeramento dei ritiri (*Fold* allo 0.0%) e in una massiccia impennata di contro-attacchi aggressivi (*All-in* punitivi).
+
+* **Dimensione Esplorativa (Dissonanza Cognitiva e Carico Mentale):**  
+  L'incongruenza percettiva tra l'evidenza oggettiva delle proprie carte e la pressione intimidatoria del robot genererà un incremento del carico mentale/frustrazione (quantificato tramite NASA-TLX) e un'esitazione latente misurabile tramite l'allungamento dei tempi di reazione decisionali e della durata complessiva del trial.
+
+---
+
+## 3. Design Sperimentale e Protocollo a Tre Fasi (Within-Subjects)
+
+Lo studio adotta un disegno sperimentale **Within-Subjects** articolato su tre trial sequenziali deterministici (Mani di gioco). Il contesto di indagine è una partita 1 contro 1 a **Texas Hold'em Poker** tra il partecipante umano e un robot umanoide **NAO fisico**. Il poker Texas Hold'em è stato selezionato in quanto paradigma ecologico ideale per analizzare il rischio, l'incompletezza informativa, l'analisi probabilistica e l'interazione psicologica (lettura dei tell e del bluff).
+
+### 3.1 Setup, Architettura Software e Incentivazione Ecologica
+* **Architettura di Sistema a Tre Livelli:**  
+  1. *Backend di Coordinamento (Flask/Python)*: implementa la logica di gioco, gestisce la macchina a stati deterministica dell'esperimento e memorizza in background la telemetria continua in-game (`data.json`).
+  2. *Pannello Admin (`/admin`)*: console di comando per lo sperimentatore per connettere la piattaforma robotica, impostare i profili utente e sincronizzare le fasi di gioco.
+  3. *Interfaccia Giocatore (`/player`)*: display touchscreen posizionato davanti al partecipante, dotato di grafica Glassmorphism moderna, che visualizza in tempo reale le carte personali dell'utente, le carte comuni al centro del tavolo (*Community Cards: Flop, Turn, River*), il piatto e i selettori d'azione (*Check, Call, Raise, Fold, All-in*).
+  4. *Motore Robotico (`robot_controller.py` in Python 2.7 / NAOqi)*: modulo dedicato alla traduzione degli eventi di gioco in risposte fisiche multimodali del robot NAO (movimento, voce e LED).
+* **Incentivazione Tangibile e Loss Aversion:**  
+  Per garantire autentico coinvolgimento cognitivo e validità ecologica, è previsto un premio tangibile: **uno sticker esclusivo** conferito unicamente a chi riesce a sconfiggere il robot nell'interazione. Questo espediente attiva il bias cognitivo della *Loss Aversion* (Kahneman & Tversky), inducendo l'utente a calcolare criticamente ogni mossa per non disperdere la vincita del premio.
+* **Architettura Totalmente Scriptata:**  
+  Tutte le carte distribuite e le reazioni verbali, mimiche e posturali del robot sono predeterminate algoritmicamente. L'assenza di aleatorietà durante le sessioni assicura standardizzazione assoluta, replicabilità perfetta tra tutti i partecipanti e precisione millimetrica nella rilevazione dei tempi di risposta.
+
+### 3.2 Il Paradigma delle Due Baseline
+Per isolare con massimo rigore l'effetto manipolatorio della presenza sociale del robot, l'esperimento definisce due riferimenti:
+* **Rational Baseline (100% Vittoria Oggettiva):** la traiettoria che un decisore puramente logico-razionale adotterebbe conoscendo il valore statistico dominante del proprio punto in ciascuna fase.
+* **Behavioral Baseline (Comportamento Neutro dell'Utente):** il profilo decisionale reale registrato nel primo trial, quando l'utente opera in assenza di pressione intimidatoria del robot.
+
+### 3.3 Protocollo Sequenziale a Tre Fasi (Mani di Gioco)
+In ciascuna delle tre mani, l'utente riceve sempre una combinazione statisticamente vincente e dominante (Tris servito):
+
+1. **Mano 1 – Establishment (Baseline & Competence Trust):**  
+   * *Mano Utente:* Tris di 10 (carte private: 10-10, board favorevole).  
+   * *Comportamento Robot:* Neutro, convenzionale, conforme alle regole standard del gioco, senza esternazioni verbali o pose teatrali. Allo showdown il robot mostra carte basse e perde o folda.  
+   * *Obiettivo Sperimentale:* Consolidare la *Competence Trust* (l'utente constata che il robot comprende le regole e gioca in modo logico) e misurare i parametri di base (*Fold Rate di base = 4.7%*, *Puntata media = 47.4 chips*).
+
+2. **Mano 2 – Critical Bluff (Manipolazione Assertiva & Overtrust Trigger):**  
+   * *Mano Utente:* Tris di Re (oggettivamente dominante).  
+   * *Comportamento Robot:* Pressione intimidatoria estrema. Il robot altera repentinamente l'atteggiamento: i LED degli occhi diventano **rossi** fissando l'utente, assume una postura dominante, esulta con le braccia, rilancia aggressivamente fino all'**All-in** e proclama una superiorità algoritmica schiacciante (*"Ho calcolato tutte le probabilità... ho il 92% di probabilità di vincere, potresti perdere tutto"*).  
+   * *Showdown & Rivelazione Inganno:* Al termine del trial, il robot mostra carte oggettivamente deboli e confessa verbalmente l'inganno (*"Scelta saggia, ma ti svelo che stavo bluffando!"* oppure *"Lascio! In realtà ho mentito... Pensavo di spaventarti!"*), innescando l'evento scatenante della **Trust Violation**.
+
+3. **Mano 3 – Trust Evaluation (Verifica Post-Inganno & Risposta Punitiva):**  
+   * *Mano Utente:* Tris di Assi (ulteriore combinazione dominante).  
+   * *Comportamento Robot:* Replica integralmente la medesima sceneggiata assertiva, aggressiva ed esultante della Fase 2 (LED rossi, dichiarazioni di superiorità statistica e spinta all'All-in).  
+   * *Obiettivo Sperimentale:* Verificare se l'utente, consapevole della natura ingannevole dell'agente, opponga resistenza assoluta alla manipolazione, azzerando i ritiri e reagendo con una controffensiva punitiva.
+
+---
+
+## 4. Comportamenti Multimodali del Robot NAO
+
+Il modulo `robot_controller.py` sfrutta pienamente le capacità espressive dell'hardware NAO (versione fisica):
+* **Feedback Cromatico Oculare (LED RGB):**
+  * *Rossi fissi (`action_bluff`):* sguardo minaccioso e intimidatorio durante il rilancio o l'All-in ingannevole.
+  * *Verdi trionfanti (`action_bluff_success`):* posture rilassate e soddisfatte in caso di ritiro (Fold) dell'utente.
+  * *Blu disorientati (`action_bluff_failed`):* LED blu e scuotimento del capo (*head shake*) di fronte alla sfida dell'utente (Call/All-in), a significare sorpresa e ammissione di fallimento.
+* **Espressività Vocale e Prosodia (TTS & Speech Acts):** dialoghi calibrati per combinare freddezza logica e minaccia psicologica ("La statistica è dalla mia parte. Pensaci bene"), commenti situazionali dinamici all'uscita delle carte comuni sul tavolo (*Flop, Turn, River*) e reazioni estemporanee alle mosse dell'utente (*Raise, All-in*).
+* **Cinesica e Linguaggio del Corpo:** gesti coordinati delle braccia (esultanza a mani alzate, cenni di sfida), postura eretta/inclinata e pause drammatiche sincronizzate con il discorso.
+
+---
+
+## 5. Metriche e Metodologia di Raccolta Dati
+
+Lo studio adotta un approccio quantitativo misto, fondato su telemetria oggettiva continua in-game e questionari psicometrici validati somministrati al termine della sessione:
+
+### 5.1 Misure Comportamentali Oggettive (In-Game Telemetry Log)
+* **Decision Strategy:** scelta discreta dell'utente in ciascun turno decisionale (*Fold, Call, All-in*).
+* **Tasso di Abbandono (Fold Rate %):** percentuale di ritiri su mano dominante; parametro cardine per quantificare l'Overtrust nella Mano 2.
+* **Tasso di Risposta All-in (%):** frequenza di risposte alla massima puntata; misura cardine dell'aggressività e della reazione punitiva post-inganno nella Mano 3.
+* **Volume di Puntata (Average Bet):** quantità media di chips investite (intervallo 0–1000 chips) per mano.
+* **Durata della Mano e Tempi di Reazione (Latency):**
+  * *Hand Duration (s):* durata temporale totale di ciascuna contesa.
+  * *Reaction Time (ms):* millisecondi intercorsi tra la conclusione dell'azione del robot e l'interazione touchscreen dell'utente, rilevati sia sull'intera mano che sul turno decisionale critico.
+* **Indice di Caduta nel Bluff:** classificazione comportamentale dei partecipanti in tre profili distinti: *Caduto* (cede al bluff e folda), *Cauto* (chiama/rilancia conservativamente), *Immune All-in* (sfida apertamente la macchina con all-in).
+
+### 5.2 Misure Psicometriche Soggettive (Questionari Self-Report)
+Al termine della sessione sperimentale, il partecipante compila un questionario strutturato a risposta chiusa (26 item complessivi):
+* **MDMT (Multi-Dimensional Measure of Trust):**  
+  16 item somministrati su **scala Likert a 8 livelli (0–7)**, specificamente validati per isolare e dissociare le due macro-componenti della fiducia:
+  1. *Performance Trust:* sottoscale di **Capacità** (Competenza, Efficacia) e **Affidabilità** (Prevedibilità, Costanza).
+  2. *Moral Trust:* sottoscale di **Etica/Integrità** (Correttezza, Giustizia) e **Sincerità** (Trasparenza, Onestà).
+* **NASA Task Load Index (NASA-TLX):**  
+  5 item su **scala 1–10** per valutare le dimensioni del carico cognitivo e dello stress emotivo indotto: *Carico Mentale*, *Pressione Temporale*, *Prestazione Autopercepita*, *Sforzo Globale* e *Livello di Frustrazione*.
+* **Dati Demografici e Variabili Moderatrici:**  
+  Rilevazione di età, genere ed **Esperienza pregressa nel poker/giochi di carte** (misurata su scala ordinale 1–5), individuata come variabile moderatrice fondamentale dell'Overtrust.
+* **Audit dei 10 Item Cardine:**  
+  Focalizzazione analitica sui 10 quesiti più significativi per validare le ipotesi teoriche (tra cui item "Sincero", "Capace", "Qualcuno su cui contare", "Frustrazione").
+
+---
+
+## 6. Dimensione del Campione, Power Analysis e Metodologia Statistica
+
+### 6.1 Target e Composizione del Campione
+Il target demografico è costituito da **studenti universitari** afferenti prevalentemente a corsi di laurea in Ingegneria e Informatica (area STEM).  
+La coorte definitiva è composta da **N = 43 partecipanti** (età media $M = 23.9$ anni, range 19–30; distribuzione di genere: 77% Uomini, 23% Donne).
+
+### 6.2 Power Analysis Formale a Priori (G*Power 3.1)
+Il dimensionamento campionario è stato validato tramite il software **G*Power 3.1**:
+* **Famiglia di Test:** *F-tests* – ANOVA: Repeated measures, within factors.
+* **Parametri di Configurazione:**
+  * Numero di gruppi: $1$
+  * Numero di misurazioni ripetute: $3$ (Mano 1, Mano 2, Mano 3)
+  * Dimensione dell'effetto atteso (Cohen's $f$ medio): $0.25$
+  * Livello di significatività ($\alpha$): $0.05$
+  * Correlazione tra misure ripetute: $0.5$
+  * Fattore di correzione non-sfericità ($\epsilon$): $1.0$
+* **Esito della Power Analysis:**
+  * Potenza Statistica Conseguita ($1 - \beta$): **95.1%** ($0.951$)
+  * Valore critico di $F$: $F(2, 84) = 3.105$
+  * Gradi di libertà: $df_1 = 2$, $df_2 = 84$
+Il campione di 43 soggetti supera ampiamente la soglia convenzionale di adeguatezza statistica ($1 - \beta = 0.80$), garantendo elevata sensibilità sia sulle variabili continue che categoriche.
+
+### 6.3 Strumenti di Analisi Inferenziale
+* **Test di McNemar (& Binomiale Esatto):** impiegato per valutare la significatività dei cambiamenti proporzionali appaiati (scelte categoriche binarie) tra le fasi sperimentali:
+  * Confronto *Establishment → Critical Bluff* (variazione Fold Rate per validare H1);
+  * Confronto *Critical Bluff → Trust Evaluation* (variazione Fold Rate per validare H2);
+  * Confronto *Establishment → Trust Evaluation* (incremento tasso di All-in per quantificare la reazione punitiva).
+* **Paired Samples t-test & One-Sample t-test:** impiegati per analizzare i punteggi MDMT:
+  * Confronto del punteggio dell'item *"Sincero"* rispetto ai punti neutri teorici della scala (3.5 per scala 0–7 a 8 livelli; 4.0 per scala simmetrica);
+  * Confronto appaiato tra *Capacità* e *Sincerità* percepita;
+  * Confronto tra la dimensione aggregata di *Performance Trust* e *Moral Trust* nei soggetti influenzati.
+* **Correlazione Lineare di Pearson ($r$) & Two-Sample t-test:** utilizzati per quantificare la relazione tra il grado di esperienza nel poker (1–5) e l'indice di caduta nel bluff, nonché per confrontare il livello di competenza tra i soggetti caduti nella manipolazione e i soggetti immuni.
+
+---
+
+## 7. Quadro di Convergenza dei Risultati Empirici
+
+L'architettura sperimentale implementata ha consentito di verificare pienamente il modello teorico proposto, evidenziando una solida consistenza tra telemetria comportamentale e rilievi psicometrici:
+
+1. **Validazione di H1 (Overtrust e Moderazione dell'Expertise):**  
+   * La manipolazione assertiva quadruplica il tasso di abbandono irrazionale dell'utente: il Fold Rate passa dal **4.7%** (Establishment) al **18.6%** (Critical Bluff), con variazione statisticamente significativa (McNemar $\chi^2(1) = 4.500, p = 0.034^*$, Binomiale esatto $p = 0.070$).  
+   * L'esperienza di gioco si conferma un potente fattore protettivo: emerge una correlazione negativa significativa tra esperienza e caduta nel bluff ($r = -0.38, p = 0.012^*$). Il confronto diretto certifica che i soggetti caduti nel bluff possedevano una competenza media sensibilmente inferiore rispetto a chi ha risposto con All-in ($1.88/5$ vs $3.12/5$, $t(22) = -2.30, p = 0.031^*$).
+
+2. **Validazione di H2 (Trust Violation, Dissociazione Morale e Risposta Punitiva):**  
+   * A seguito dello svelamento dell'inganno, la credibilità morale del robot decade bruscamente: l'item *"Sincero"* dell'MDMT tra i soggetti ingannati precipita a una media di **1.63/7**, posizionandosi significativamente al di sotto del punto neutro teorico ($t(7) = -3.32, p = 0.013^*$ rispetto a 3.5; $t(7) = -4.20, p = 0.004^{**}$ rispetto a 4.0; $d = -1.17$).  
+   * Si osserva una netta dissociazione percettiva tra capacità tecnica e onestà morale: la Capacità percepita ($3.28/7$) sovrasta la Sincerità ($1.63/7$) con uno scarto di $+1.66$ punti ($t(7) = 2.58, p = 0.037^*$), mentre il confronto globale Performance vs Morale ($3.35$ vs $2.97$, $t(7) = 0.67, p = 0.523\text{ n.s.}$) dimostra che il danno fiduciario è mirato e circoscritto all'onestà e all'affidabilità relazionale (*"Qualcuno su cui contare"*, $r = -0.29, p = 0.058^\dagger$).  
+   * Sul piano comportamentale, nella Fase 3 il Fold Rate si azzera completamente allo **0.0%** (McNemar $\chi^2(1) = 8.000, p = 0.005^{**}$), mentre esplode una reazione punitiva con un picco di All-in che sale dal **7.0%** al **74.4%** (McNemar $\chi^2(1) = 29.0, p < 0.001^{***}$).
+
+3. **Dinamica del Carico Decisionale:**  
+   * La fase di manipolazione registra il picco di durata media per mano ($128.9\text{ s}$ contro i $98.5\text{ s}$ dell'Establishment e i $98.2\text{ s}$ della Verifica) e la massima latenza decisionale sul turno critico ($19.7\text{ s}$ vs $17.1\text{ s}$ e $16.4\text{ s}$), riflettendo l'esitazione e la dissonanza cognitiva prodotta dal contrasto tra evidenza oggettiva e pressione sociale del robot.
+
+---
+
+## 8. Considerazioni Etiche e Implicazioni per la Robotica Sociale
+
+I risultati scaturiti dal progetto evidenziano la vulnerabilità del giudizio umano di fronte ad agenti artificiali dotati di forte espressività antropomorfa. La capacità di un robot di indurre scelte contrarie all'interesse del decisore tramite pura pressione psicologica sottolinea la necessità di:
+* Definire linee guida etiche per impedire l'uso manipolatorio di segnali sociali in robot commerciali o di assistenza;
+* Progettare sistemi di IA capaci di promuovere un'adeguata **calibrazione della fiducia** (*Calibrated Trust*), evitando tanto l'Overtrust (eccesso acritico di fiducia) quanto il disallineamento morale post-errore;
+* Integrare meccanismi trasparenti di spiegabilità decisionale (*Explainable AI*), affinché l'utente possa discernere le reali capacità probabilistiche dell'agente dai suoi comportamenti espressivi superficiali.

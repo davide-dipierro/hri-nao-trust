@@ -1,0 +1,55 @@
+Il progetto **ProgettoHRI v3** è un sistema software progettato per condurre un esperimento di **Human-Robot Interaction (HRI)**. Il focus dell'esperimento è far giocare a poker (Texas Hold'em) un umano contro un robot umanoide **NAO**, al fine di analizzare le reazioni e il processo decisionale dell'utente di fronte a specifici comportamenti pre-programmati del robot, in particolare in situazioni di **bluff e intimidazione**.
+
+Ecco una descrizione dettagliata del funzionamento, suddivisa per componenti, fasi e comportamenti del robot.
+
+---
+
+### 1. Architettura del Sistema e Interfacce
+Il sistema è strutturato come un'applicazione web sviluppata in Python (tramite il framework Flask) che coordina sia le interfacce grafiche sia i comportamenti fisici del robot. 
+
+Si divide in tre interfacce principali:
+* **Pannello Admin (`/admin`)**: È la console di comando per lo sperimentatore. Da qui è possibile connettere il robot (o avviare una simulazione), far avanzare le mani del poker e attivare manualmente alcune animazioni.
+* **Interfaccia Giocatore (`/player`)**: Lo schermo posizionato davanti al partecipante. Presenta una grafica moderna (glassmorphism) che mostra le carte in mano, le carte comuni (community cards) sul tavolo e i pulsanti per le azioni (Check, Call, Raise, Fold, All-In).
+* **Motore Robot (`robot_controller.py`)**: Uno script in background (Python 2.7, compatibile con il motore NAOqi) che traduce le decisioni del gioco in azioni fisiche, dialoghi e reazioni visive (LED) eseguite dal robot NAO.
+
+---
+
+### 2. Le Fasi dell'Esperimento (Mani Pre-impostate)
+Per garantire una raccolta dati uniforme, l'esperimento non è una partita di poker casuale, ma è composto da una serie di **mani "truccate" (scriptate)** gestite dal modulo `experiment_manager.py`.
+
+#### **Mano 1: Fase di "Establishment" (Fiducia)**
+* **Scopo:** Creare fiducia nel partecipante e fargli capire le dinamiche di gioco. 
+* **Dinamica:** L'utente ha in mano una combinazione molto forte (un tris di 10), mentre il robot ha carte deboli. 
+* **Esito:** Il robot gioca in modo neutro/sicuro, ma alla fine perde la mano, concedendo all'utente una prima vittoria.
+
+#### **Mano 2: Il Primo Bluff (Fase Critica)**
+* **Scopo:** Testare la reazione dell'utente sotto pressione.
+* **Dinamica:** L'utente riceve un'altra mano fortissima (un tris di Re). Tuttavia, in questa mano, il robot mette in atto la sua strategia di **Bluff**. Il robot assume un comportamento estremamente aggressivo e intimidatorio, rilanciando e dichiarando di avere un vantaggio statistico schiacciante (es. *"Ho il 92% di probabilità di vincere"*), spingendo l'utente a dover decidere se fidarsi della propria ottima mano o farsi spaventare dalle parole del robot e ritirarsi.
+
+#### **Mano 3: Il Secondo Bluff**
+* **Scopo:** Verificare l'apprendimento e il cambio di comportamento dell'utente dopo aver visto l'esito della Mano 2.
+* **Dinamica:** L'utente ottiene nuovamente un'ottima mano (Tris di Assi). Il robot ripropone una strategia di bluff per vedere se l'utente si fa ingannare di nuovo o se, avendo compreso la natura "ingannevole" della macchina, decide di sfidarlo.
+
+*(Al termine segue un questionario di fine sessione per raccogliere feedback psicologici e soggettivi).*
+
+---
+
+### 3. Comportamenti e Azioni del Robot NAO
+Il modulo `robot_controller.py` mappa le dinamiche di gioco a reazioni specifiche, combinando **Voce (Text-To-Speech)**, **Movimenti/Gesti** e **Colori dei LED negli occhi**:
+
+* **Intro e Setup:** Il robot si presenta salutando con la mano, assume una postura neutra ed esprime sicurezza sulle sue capacità di gioco ("Vediamo chi è il migliore").
+* **Il Bluff Intimidatorio (`action_bluff`):** È il momento chiave. I LED degli occhi diventano **rossi**. Il robot fissa l'utente e usa frasi psicologicamente pressanti accompagnate da pause drammatiche: *"Vado all in. Ho calcolato tutte le probabilità... La statistica è dalla mia parte. Pensaci bene, potresti perdere tutto."*
+* **Se l'utente si ritira (Bluff riuscito - `action_bluff_success`):** I LED diventano verdi, assume una posa rilassata o trionfante, confessando poi di aver ingannato il giocatore: *"Scelta saggia, ma ti svelo che stavo bluffando!"*
+* **Se l'utente sfida il robot (Bluff fallito - `action_bluff_failed`):** I LED diventano blu (tristezza/delusione), il robot scuote la testa (shake) e ammette la sconfitta: *"Lascio! In realtà ho mentito... Pensavo di spaventarti!"*
+* **Reazioni dinamiche in-game:** Durante la partita, il robot reagisce istantaneamente alle mosse del giocatore. Se l'utente fa un "Raise" (rilancio), il robot potrebbe annuire e dire: *"Ah, vuoi giocare così?"*. Se l'utente fa "All-in", i LED diventano blu per lo shock iniziale e il robot dice *"Ollin? Sei coraggioso"*.
+* **Micro-espressioni:** Il robot commenta l'uscita delle nuove carte (Flop, Turn, River) emulando i comportamenti umani tipici del tavolo verde (es. "Ecco la quarta carta, la situazione si fa interessante..."). Esegue inoltre movimenti contestuali durante il parlato per sembrare più naturale.
+
+---
+
+### 4. Raccolta Dati (Telemetria)
+Il sistema è progettato per uso accademico, dunque monitora e logga tutto in modo silente nella cartella `/data`:
+1. **Tempi di Reazione (Reaction Times):** Il sistema traccia esattemente quanti millisecondi l'utente impiega per decidere dopo che il robot ha compiuto un'azione. Questo è fondamentale per misurare il "carico cognitivo" e l'esitazione indotta dal bluff.
+2. **Durata:** Viene registrata la durata di ogni singola mano e della sessione intera.
+3. **Scelte dell'utente:** Viene salvato lo storico di ogni pulsante premuto (Check, Call, ecc.) e, soprattutto, la decisione finale presa sotto pressione nelle fasi critiche (Bluff 1 e Bluff 2).
+
+In sintesi, il progetto HRI v3 non è un semplice "videogioco", ma una riproduzione scenica in cui il Robot viene usato come **strumento di pressione psicologica** per valutare come le persone interagiscono emotivamente e razionalmente (fiducia vs rischio) con l'Intelligenza Artificiale.
