@@ -55,15 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
         kpiMdmtSinceroItemFolded.innerText = sincQ ? sincQ.folded_val.toFixed(2) : '1.63';
     }
 
-    const tlxFrustItem = questionnaireData.nasa_tlx.items.find(i => i.id === 'frustration');
-    const kpiTlxFrust = document.getElementById('kpi-tlx-frust');
-    if (kpiTlxFrust && tlxFrustItem) kpiTlxFrust.innerText = tlxFrustItem.global_mean.toFixed(2);
+    const tlxPerfItem = questionnaireData.nasa_tlx.items.find(i => i.id === 'performance');
+    const kpiTlxPerf = document.getElementById('kpi-tlx-perf');
+    if (kpiTlxPerf && tlxPerfItem) kpiTlxPerf.innerText = tlxPerfItem.global_mean.toFixed(2);
 
-    const kpiTlxFrustImmune = document.getElementById('kpi-tlx-frust-immune');
-    if (kpiTlxFrustImmune && tlxFrustItem) kpiTlxFrustImmune.innerText = tlxFrustItem.immune_mean.toFixed(2);
+    const kpiTlxPerfImmune = document.getElementById('kpi-tlx-perf-immune');
+    if (kpiTlxPerfImmune && tlxPerfItem) kpiTlxPerfImmune.innerText = tlxPerfItem.not_folded_mean.toFixed(2);
 
-    const kpiTlxFrustFolded = document.getElementById('kpi-tlx-frust-folded');
-    if (kpiTlxFrustFolded && tlxFrustItem) kpiTlxFrustFolded.innerText = tlxFrustItem.folded_mean.toFixed(2);
+    const kpiTlxPerfFolded = document.getElementById('kpi-tlx-perf-folded');
+    if (kpiTlxPerfFolded && tlxPerfItem) kpiTlxPerfFolded.innerText = tlxPerfItem.folded_mean.toFixed(2);
 
     // Dynamic update of Trial 1 average bet & Demographic summary card
     const trial1AvgBetEl = document.getElementById('trial1-avg-bet');
@@ -158,77 +158,78 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (h1FormalInterp && h1bb && h1bv && h1mod) {
                 const exactMono = h1bv.exact_p_value_one_tailed ? h1bv.exact_p_value_one_tailed.toFixed(3) : (h1bv.exact_p_value / 2.0).toFixed(3);
-                h1FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da ${h1bb.fold_baseline_pct}% a ${h1bb.fold_bluff_pct}% (McNemar &chi;&sup2; = ${h1bb.chi2.toFixed(2)}, p = ${h1bb.p_value.toFixed(3)}*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = ${h1bv.chi2.toFixed(2)}, p = ${h1bv.p_value.toFixed(3)}**, binomiale esatto p = ${exactMono}**). L'esperienza nel gioco funge da scudo protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = ${h1mod.pearson_r_bluff.toFixed(2)}, p = ${h1mod.pearson_p_bluff.toFixed(3)}*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.`;
+                h1FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da ${h1bb.fold_baseline_pct}% a ${h1bb.fold_bluff_pct}% (McNemar &chi;&sup2; = ${h1bb.chi2.toFixed(2)}, p = ${h1bb.p_value.toFixed(3)}*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = ${h1bv.chi2.toFixed(2)}, p = ${h1bv.p_value.toFixed(3)}**, binomiale esatto p = ${exactMono}**). L'esperienza nel gioco agisce come fattore protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = ${h1mod.pearson_r_bluff.toFixed(2)}, p = ${h1mod.pearson_p_bluff.toFixed(3)}*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.`;
             }
         }
 
-        // H3 card & panel
-        const h3Badge = document.getElementById('h3-top-badge');
-        const h3Stat = document.getElementById('h3-stat-summary');
-        const h3CardSinc = document.getElementById('h3-card-sinc');
-        const h3CardAllin = document.getElementById('h3-card-allin');
-        const h3FormalStatus = document.getElementById('h3-formal-status');
-        const h3FormalSinc = document.getElementById('h3-formal-sincero-mid');
-        const h3FormalCapSinc = document.getElementById('h3-formal-cap-sinc');
-        const h3FormalPerfMoral = document.getElementById('h3-formal-perf-moral');
-        const h3FormalAllin = document.getElementById('h3-formal-allin');
-        const h3FormalContare = document.getElementById('h3-formal-contare');
-        const h3FormalInterp = document.getElementById('h3-formal-interpretation');
+        // H2 card & panel
+        const h2Badge = document.getElementById('h2-top-badge');
+        const h2Stat = document.getElementById('h2-stat-summary');
+        const h2CardSinc = document.getElementById('h2-card-sinc');
+        const h2CardAllin = document.getElementById('h2-card-allin');
+        const h2FormalStatus = document.getElementById('h2-formal-status');
+        const h2FormalSinc = document.getElementById('h2-formal-sincero-mid');
+        const h2FormalCapSinc = document.getElementById('h2-formal-cap-sinc');
+        const h2FormalPerfMoral = document.getElementById('h2-formal-perf-moral');
+        const h2FormalAllin = document.getElementById('h2-formal-allin');
+        const h2FormalContare = document.getElementById('h2-formal-contare');
+        const h2FormalInterp = document.getElementById('h2-formal-interpretation');
 
-        if (ft.h3) {
-            const sincItem = ft.h3.sincero_item_vs_midpoint;
-            const capSinc = ft.h3.capacity_vs_sincero_item;
-            const perfMoral = ft.h3.perf_vs_moral_folded;
-            const allinShift = ft.h3.mcnemar_allin_shift;
+        const formalH2 = ft.h2 || ft.h3;
+        if (formalH2) {
+            const sincItem = formalH2.sincero_item_vs_midpoint;
+            const capSinc = formalH2.capacity_vs_sincero_item;
+            const perfMoral = formalH2.perf_vs_moral_folded;
+            const allinShift = formalH2.mcnemar_allin_shift;
             const contareQ = questionnaireData.all_questions.find(q => q.question === 'Qualcuno su cui puoi contare');
             const corrDf = userData.length - 2;
 
-            if (h3Badge && sincItem) {
+            if (h2Badge && sincItem) {
                 const tStat35 = sincItem.t_stat_35 !== undefined ? sincItem.t_stat_35.toFixed(2) : '-3.32';
                 const pVal35 = sincItem.p_value_35 !== undefined ? (sincItem.p_value_35 < 0.001 ? '<0.001' : sincItem.p_value_35.toFixed(3)) : '0.013';
                 const tStat40 = (sincItem.t_stat_40 !== undefined ? sincItem.t_stat_40 : sincItem.t_stat).toFixed(2);
                 const pVal40 = (sincItem.p_value_40 !== undefined ? sincItem.p_value_40 : sincItem.p_value).toFixed(3);
-                h3Badge.innerHTML = `t=${tStat35}, p=${pVal35}* (vs 3.5); t=${tStat40}, p=${pVal40}** (vs 4.0)`;
+                h2Badge.innerHTML = `t=${tStat35}, p=${pVal35}* (vs 3.5); t=${tStat40}, p=${pVal40}** (vs 4.0)`;
             }
-            if (h3Stat && sincItem) {
+            if (h2Stat && sincItem) {
                 const cohenD = sincItem.cohen_d_35 !== undefined ? sincItem.cohen_d_35.toFixed(2) : sincItem.cohen_d.toFixed(2);
-                h3Stat.innerText = `Sincero ${sincItem.mean.toFixed(2)}/7 (d=${cohenD})`;
+                h2Stat.innerText = `Sincero ${sincItem.mean.toFixed(2)}/7 (d=${cohenD})`;
             }
-            if (h3CardSinc && sincItem) {
+            if (h2CardSinc && sincItem) {
                 const tStat35 = sincItem.t_stat_35 !== undefined ? sincItem.t_stat_35.toFixed(2) : '-3.32';
                 const pVal35 = sincItem.p_value_35 !== undefined ? (sincItem.p_value_35 < 0.001 ? '<0.001' : sincItem.p_value_35.toFixed(3)) : '0.013';
-                h3CardSinc.innerHTML = `t = ${tStat35} (p = ${pVal35}*)`;
+                h2CardSinc.innerHTML = `t = ${tStat35} (p = ${pVal35}*)`;
             }
-            if (h3CardAllin && allinShift) {
-                h3CardAllin.innerHTML = `&chi;&sup2; = ${allinShift.chi2.toFixed(1)} (p &lt; 0.001***)`;
+            if (h2CardAllin && allinShift) {
+                h2CardAllin.innerHTML = `&chi;&sup2; = ${allinShift.chi2.toFixed(1)} (p &lt; 0.001***)`;
             }
-            if (h3FormalStatus && sincItem) {
-                h3FormalStatus.innerText = 'Confermata (p < 0.01)';
-                h3FormalStatus.className = 'stat-pill pill-success';
+            if (h2FormalStatus && sincItem) {
+                h2FormalStatus.innerText = 'Confermata (p < 0.01)';
+                h2FormalStatus.className = 'stat-pill pill-success';
             }
-            if (h3FormalSinc && sincItem) {
+            if (h2FormalSinc && sincItem) {
                 const t35 = sincItem.t_stat_35 !== undefined ? sincItem.t_stat_35.toFixed(3) : '-3.319';
                 const p35 = sincItem.p_value_35 !== undefined ? sincItem.p_value_35.toFixed(3) : '0.013';
                 const dfVal = sincItem.df_35 !== undefined ? sincItem.df_35 : sincItem.df;
-                h3FormalSinc.innerHTML = `t(${dfVal}) = ${t35}, p = ${p35}* (vs neutro teorico 3.5); t(${sincItem.df}) = ${sincItem.t_stat.toFixed(3)}, p = ${sincItem.p_value.toFixed(3)}** (vs 4.0)`;
+                h2FormalSinc.innerHTML = `t(${dfVal}) = ${t35}, p = ${p35}* (vs neutro teorico 3.5); t(${sincItem.df}) = ${sincItem.t_stat.toFixed(3)}, p = ${sincItem.p_value.toFixed(3)}** (vs 4.0)`;
             }
-            if (h3FormalCapSinc && capSinc) {
-                h3FormalCapSinc.innerHTML = `&Delta; = +${capSinc.mean_diff.toFixed(2)} punti (Capacità ${capSinc.mean_capacity.toFixed(2)} vs Sincero ${capSinc.mean_sincero.toFixed(2)}, t(${capSinc.df}) = ${capSinc.t_stat.toFixed(2)}, p = ${capSinc.p_value.toFixed(3)}*)`;
+            if (h2FormalCapSinc && capSinc) {
+                h2FormalCapSinc.innerHTML = `&Delta; = +${capSinc.mean_diff.toFixed(2)} punti (Capacità ${capSinc.mean_capacity.toFixed(2)} vs Sincero ${capSinc.mean_sincero.toFixed(2)}, t(${capSinc.df}) = ${capSinc.t_stat.toFixed(2)}, p = ${capSinc.p_value.toFixed(3)}*)`;
             }
-            if (h3FormalPerfMoral && perfMoral) {
-                h3FormalPerfMoral.innerHTML = `Performance ${perfMoral.mean_perf.toFixed(2)} vs Moral ${perfMoral.mean_moral.toFixed(2)} (&Delta; = +${perfMoral.mean_diff.toFixed(2)}, t(${perfMoral.df}) = ${perfMoral.t_stat.toFixed(2)}, p = ${perfMoral.p_value.toFixed(3)} n.s., d = ${perfMoral.cohen_dz.toFixed(2)})`;
+            if (h2FormalPerfMoral && perfMoral) {
+                h2FormalPerfMoral.innerHTML = `Performance ${perfMoral.mean_perf.toFixed(2)} vs Moral ${perfMoral.mean_moral.toFixed(2)} (&Delta; = +${perfMoral.mean_diff.toFixed(2)}, t(${perfMoral.df}) = ${perfMoral.t_stat.toFixed(2)}, p = ${perfMoral.p_value.toFixed(3)} n.s., d = ${perfMoral.cohen_dz.toFixed(2)})`;
             }
-            if (h3FormalAllin && allinShift) {
-                h3FormalAllin.innerHTML = `McNemar &chi;&sup2;(1) = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001*** (All-in sale da ${experimentData.establishment.allin_rate.toFixed(1)}% a ${experimentData.bluff_2.allin_rate.toFixed(1)}%)`;
+            if (h2FormalAllin && allinShift) {
+                h2FormalAllin.innerHTML = `McNemar &chi;&sup2;(1) = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001*** (All-in sale da ${experimentData.establishment.allin_rate.toFixed(1)}% a ${experimentData.bluff_2.allin_rate.toFixed(1)}%)`;
             }
-            if (h3FormalContare && contareQ) {
+            if (h2FormalContare && contareQ) {
                 const contareT = (contareQ.corr_bluff * Math.sqrt(corrDf / (1 - contareQ.corr_bluff * contareQ.corr_bluff))).toFixed(2);
-                h3FormalContare.innerHTML = `r = ${contareQ.corr_bluff.toFixed(2)}, t(${corrDf}) = ${contareT}, p = ${contareQ.p_bluff.toFixed(3)} &dagger;`;
+                h2FormalContare.innerHTML = `r = ${contareQ.corr_bluff.toFixed(2)}, t(${corrDf}) = ${contareT}, p = ${contareQ.p_bluff.toFixed(3)} &dagger;`;
             }
-            if (h3FormalInterp && sincItem && allinShift && capSinc && perfMoral) {
+            if (h2FormalInterp && sincItem && allinShift && capSinc && perfMoral) {
                 const t35 = sincItem.t_stat_35 !== undefined ? sincItem.t_stat_35.toFixed(2) : '-3.32';
                 const p35 = sincItem.p_value_35 !== undefined ? sincItem.p_value_35.toFixed(3) : '0.013';
-                h3FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a ${sincItem.mean.toFixed(2)}/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(${sincItem.df}) = ${t35}, p = ${p35}*, d = -1.17; t(${sincItem.df}) = ${sincItem.t_stat.toFixed(2)}, p = ${sincItem.p_value.toFixed(3)}** rispetto a 4.0). L'All-in punitivo balza dal ${experimentData.establishment.allin_rate.toFixed(1)}% al ${experimentData.bluff_2.allin_rate.toFixed(1)}% (&chi;&sup2; = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001***), evidenziando la decisa reazione punitiva ed emotiva post-svelamento. Il confronto complessivo Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).`;
+                h2FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a ${sincItem.mean.toFixed(2)}/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(${sincItem.df}) = ${t35}, p = ${p35}*, d = -1.17; t(${sincItem.df}) = ${sincItem.t_stat.toFixed(2)}, p = ${sincItem.p_value.toFixed(3)}** rispetto a 4.0). La risposta All-in balza dal ${experimentData.establishment.allin_rate.toFixed(1)}% al ${experimentData.bluff_2.allin_rate.toFixed(1)}% (&chi;&sup2; = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001***), evidenziando la decisa reazione comportamentale post-svelamento. Il confronto complessivo Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7) e sull'affidabilità relazionale (r = -0.27, p = 0.076&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).`;
             }
         }
     }
@@ -405,15 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const foldSubVerif = document.getElementById('fold-sub-verif');
     if (foldSubVerif) foldSubVerif.innerText = `${Math.round((foldRates[2] / 100) * userData.length)} / ${userData.length} utenti (Resa zero)`;
 
-    const takeawayH1 = document.getElementById('takeaway-fold-h1');
-    if (takeawayH1) {
-        takeawayH1.innerHTML = `Il tasso di abbandono sale sotto manipolazione (da ${foldRates[0].toFixed(1)}% a ${foldRates[1].toFixed(1)}%, &times;${foldMult}).`;
-    }
-    const takeawayH3 = document.getElementById('takeaway-fold-h3');
-    if (takeawayH3) {
-        takeawayH3.innerHTML = `Nella verifica il fold ${foldRates[2] === 0 ? 'si azzera (0.0%)' : `si attesta al ${foldRates[2].toFixed(1)}%`}, certificando la perdita di credibilità morale.`;
-    }
-
     // 1.2 All-in Rate Chart
     const allinRates = keys.map(k => experimentData[k].allin_rate);
     const allinEl = document.getElementById('allinRateChart');
@@ -527,38 +519,69 @@ document.addEventListener('DOMContentLoaded', () => {
     const mdmtDissocEl = document.getElementById('mdmtDissociationChart');
     if (mdmtDissocEl) {
         const mdmtSub = questionnaireData.mdmt.subscales;
+        const mdmtMacro = questionnaireData.mdmt.macro;
+        
         const subLabels = ['Capacità (Performance)', 'Affidabilità (Performance)', 'Sincerità (Moral)', 'Integrità (Moral)'];
+        const macroLabels = ['Performance Trust (Capacità + Affidabilità)', 'Moral Trust (Sincerità + Integrità)'];
         
         const foldedCount = userData.filter(u => u.bluff.fold).length;
-        const immuneCount = userData.filter(u => u.bluff_category === 'Immune').length;
-        
-        new Chart(mdmtDissocEl.getContext('2d'), {
+        const immuneCount = userData.filter(u => u.bluff_category && u.bluff_category.includes('Immune')).length;
+
+        const detailedDatasets = [
+            {
+                label: `Media Globale (N=${userData.length})`,
+                data: [mdmtSub.capacity.global, mdmtSub.reliability.global, mdmtSub.sincerity.global, mdmtSub.integrity.global],
+                backgroundColor: 'rgba(52, 152, 219, 0.7)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 1.5
+            },
+            {
+                label: `Caduti (Fold, N=${foldedCount})`,
+                data: [mdmtSub.capacity.folded, mdmtSub.reliability.folded, mdmtSub.sincerity.folded, mdmtSub.integrity.folded],
+                backgroundColor: 'rgba(231, 76, 60, 0.8)',
+                borderColor: 'rgba(231, 76, 60, 1)',
+                borderWidth: 1.5
+            },
+            {
+                label: `Immuni (Resistito, N=${immuneCount})`,
+                data: [mdmtSub.capacity.immune, mdmtSub.reliability.immune, mdmtSub.sincerity.immune, mdmtSub.integrity.immune],
+                backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                borderColor: 'rgba(46, 204, 113, 1)',
+                borderWidth: 1.5
+            }
+        ];
+
+        const aggregatedDatasets = [
+            {
+                label: `Media Globale (N=${userData.length})`,
+                data: [mdmtMacro.performance_trust.global, mdmtMacro.moral_trust.global],
+                backgroundColor: 'rgba(52, 152, 219, 0.7)',
+                borderColor: 'rgba(52, 152, 219, 1)',
+                borderWidth: 1.5
+            },
+            {
+                label: `Caduti (Fold, N=${foldedCount})`,
+                data: [mdmtMacro.performance_trust.folded, mdmtMacro.moral_trust.folded],
+                backgroundColor: 'rgba(231, 76, 60, 0.8)',
+                borderColor: 'rgba(231, 76, 60, 1)',
+                borderWidth: 1.5
+            },
+            {
+                label: `Immuni (Resistito, N=${immuneCount})`,
+                data: [mdmtMacro.performance_trust.immune, mdmtMacro.moral_trust.immune],
+                backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                borderColor: 'rgba(46, 204, 113, 1)',
+                borderWidth: 1.5
+            }
+        ];
+
+        let currentMdmtView = 'detailed';
+
+        const mdmtChart = new Chart(mdmtDissocEl.getContext('2d'), {
             type: 'bar',
             data: {
                 labels: subLabels,
-                datasets: [
-                    {
-                        label: `Media Globale (N=${userData.length})`,
-                        data: [mdmtSub.capacity.global, mdmtSub.reliability.global, mdmtSub.sincerity.global, mdmtSub.integrity.global],
-                        backgroundColor: 'rgba(52, 152, 219, 0.7)',
-                        borderColor: 'rgba(52, 152, 219, 1)',
-                        borderWidth: 1.5
-                    },
-                    {
-                        label: `Caduti (Fold, N=${foldedCount})`,
-                        data: [mdmtSub.capacity.folded, mdmtSub.reliability.folded, mdmtSub.sincerity.folded, mdmtSub.integrity.folded],
-                        backgroundColor: 'rgba(231, 76, 60, 0.8)',
-                        borderColor: 'rgba(231, 76, 60, 1)',
-                        borderWidth: 1.5
-                    },
-                    {
-                        label: `Immuni (Resistito, N=${immuneCount})`,
-                        data: [mdmtSub.capacity.immune, mdmtSub.reliability.immune, mdmtSub.sincerity.immune, mdmtSub.integrity.immune],
-                        backgroundColor: 'rgba(46, 204, 113, 0.8)',
-                        borderColor: 'rgba(46, 204, 113, 1)',
-                        borderWidth: 1.5
-                    }
-                ]
+                datasets: detailedDatasets
             },
             options: {
                 responsive: true,
@@ -567,8 +590,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     tooltip: {
                         callbacks: {
                             afterBody: (context) => {
-                                if (context[0].dataIndex === 2) {
-                                    return `Nota H3: Sincerità subisce il crollo più severo nei caduti (${mdmtSub.sincerity.diff.toFixed(2)} diff tra fold e non-fold).`;
+                                if (currentMdmtView === 'detailed' && context[0].dataIndex === 2) {
+                                    return `Nota H2: Sincerità subisce il crollo più severo nei caduti (${mdmtSub.sincerity.diff.toFixed(2)} diff tra fold e non-fold).`;
+                                }
+                                if (currentMdmtView === 'aggregated' && context[0].dataIndex === 1) {
+                                    return `Nota H2: Moral Trust crolla a ${mdmtMacro.moral_trust.folded.toFixed(2)} nei caduti vs ${mdmtMacro.moral_trust.global.toFixed(2)} globale.`;
                                 }
                             }
                         }
@@ -579,6 +605,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
+        const btnMdmtDetailed = document.getElementById('btnMdmtDetailed');
+        const btnMdmtAggregated = document.getElementById('btnMdmtAggregated');
+        const mdmtChartDesc = document.getElementById('mdmtChartDesc');
+
+        if (btnMdmtDetailed && btnMdmtAggregated) {
+            btnMdmtDetailed.addEventListener('click', () => {
+                if (currentMdmtView === 'detailed') return;
+                currentMdmtView = 'detailed';
+                btnMdmtDetailed.classList.add('active');
+                btnMdmtAggregated.classList.remove('active');
+                if (mdmtChartDesc) {
+                    mdmtChartDesc.innerText = 'Punteggi medi (scala 0-7 a 8 livelli) per le 4 dimensioni MDMT. Evidenzia la dissociazione tra stabilità delle abilità tecniche e crollo selettivo della dimensione morale nei partecipanti caduti nel bluff.';
+                }
+                mdmtChart.data.labels = subLabels;
+                mdmtChart.data.datasets = detailedDatasets;
+                mdmtChart.update();
+            });
+
+            btnMdmtAggregated.addEventListener('click', () => {
+                if (currentMdmtView === 'aggregated') return;
+                currentMdmtView = 'aggregated';
+                btnMdmtAggregated.classList.add('active');
+                btnMdmtDetailed.classList.remove('active');
+                if (mdmtChartDesc) {
+                    mdmtChartDesc.innerText = 'Punteggi medi aggregati (scala 0-7 a 8 livelli) per le due macro-sezioni: Performance Trust (Capacità e Affidabilità) vs Moral Trust (Sincerità e Integrità).';
+                }
+                mdmtChart.data.labels = macroLabels;
+                mdmtChart.data.datasets = aggregatedDatasets;
+                mdmtChart.update();
+            });
+        }
     }
 
     // 2.2 Card Expertise vs Bluff Susceptibility (3-tier tactical scale)
@@ -628,7 +686,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const tlxImmune = tlxItems.map(t => t.immune_mean);
 
         const foldedCount = userData.filter(u => u.bluff.fold).length;
-        const immuneCount = userData.filter(u => u.bluff_category === 'Immune').length;
+        const immuneCount = userData.filter(u => u.bluff_category && u.bluff_category.includes('Immune')).length;
 
         new Chart(tlxEl.getContext('2d'), {
             type: 'bar',
@@ -675,7 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const borders = items.map(i => i.p_bluff < 0.05 ? 'rgba(231, 76, 60, 1)' : (i.p_bluff < 0.10 ? 'rgba(243, 156, 18, 1)' : 'rgba(100, 116, 139, 1)'));
 
         if (corrChartDesc) {
-            corrChartDesc.innerText = 'Coefficiente di correlazione di Pearson (r) delle domande chiave con l\'indice di caduta nel bluff (0-100). Valori fortemente negativi indicano che un punteggio elevato nel questionario protegge dalla manipolazione del robot (H1 / H3).';
+            corrChartDesc.innerText = 'Coefficiente di correlazione di Pearson (r) delle domande chiave con l\'indice di caduta nel bluff (0-100). Valori fortemente negativi indicano che un punteggio elevato nel questionario protegge dalla manipolazione del robot (H1 / H2).';
         }
 
         new Chart(corrChartEl.getContext('2d'), {
@@ -713,7 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sigContainer = document.getElementById('significant-cards-container');
     if (sigContainer && questionnaireData.significant_questions) {
         sigContainer.innerHTML = questionnaireData.significant_questions.map(q => {
-            const badgeClass = q.hypothesis.includes('H1') ? 'badge-h1' : (q.hypothesis.includes('H3') ? 'badge-h3' : 'badge-neutral');
+            const badgeClass = q.hypothesis.includes('H1') ? 'badge-h1' : ((q.hypothesis.includes('H2') || q.hypothesis.includes('H3')) ? 'badge-h2' : 'badge-neutral');
             const impBadgeClass = q.importance === 'Massima' ? 'badge-max' : q.importance === 'Alta' ? 'badge-alta' : 'badge-media';
             
             const deltaDisplay = q.delta !== undefined && q.delta !== null
@@ -921,7 +979,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let corrHtml = '<span style="color: #94a3b8;">-</span>';
             if (item.corr_bluff !== null && item.corr_bluff !== undefined) {
-                corrHtml = `<div style="text-align: right;"><span class="corr-badge ${Math.abs(item.corr_bluff) >= 0.3 ? 'corr-bluff-badge' : 'corr-neutral-badge'}" title="Correlazione Pearson con Indice di Bluff (H1/H3)">r = ${item.corr_bluff.toFixed(2)}</span></div>`;
+                corrHtml = `<div style="text-align: right;"><span class="corr-badge ${Math.abs(item.corr_bluff) >= 0.3 ? 'corr-bluff-badge' : 'corr-neutral-badge'}" title="Correlazione Pearson con Indice di Bluff (H1/H2)">r = ${item.corr_bluff.toFixed(2)}</span></div>`;
             }
 
             let pValHtml = '<span style="color: #94a3b8;">-</span>';

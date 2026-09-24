@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Trust Dynamics and Manipulation in HRI</title>
+    <title>Dashboard - Valutazione dell'adattamento comportamentale e della fiducia in contesti competitivi</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -14,7 +14,7 @@
             <span class="dieti-tag">DIETI &bull; Corso di Laurea Magistrale in Ingegneria Informatica</span>
             <span class="course-tag">Human-Robot Interaction &bull; A.A. 2025/2026</span>
         </div>
-        <h1 class="main-title">Trust Dynamics and Manipulation in Human-Robot Interaction</h1>
+        <h1 class="main-title">Valutazione dell'adattamento comportamentale e della fiducia in contesti competitivi</h1>
         <p class="main-subtitle">Studio Sperimentale su Overtrust e Decadimento Fiduciario con Piattaforma Umanoide NAO</p>
         
     </header>
@@ -24,8 +24,10 @@
         <div class="sticky-nav-inner">
             <div class="dashboard-nav" id="mainNavLinks">
                 <a href="#intro" class="nav-link active" data-nav="intro">Introduzione</a>
-                <a href="#hypotheses-results" class="nav-link" data-nav="hypotheses-results">Ipotesi H1 e H3</a>
+                <a href="#protocol" class="nav-link" data-nav="protocol">Protocollo Sperimentale</a>
+                <a href="#hypotheses-results" class="nav-link" data-nav="hypotheses-results">Ipotesi H1 e H2</a>
                 <a href="#collected-data" class="nav-link" data-nav="collected-data">Dati Raccolti</a>
+                <a href="#bibliography" class="nav-link" data-nav="bibliography">Bibliografia</a>
             </div>
         </div>
     </nav>
@@ -34,168 +36,230 @@
     <button id="backToTopBtn" class="back-to-top-btn" title="Torna all'inizio della pagina" aria-label="Torna in cima">↑</button>
 
     <main id="mainContent">
-        <!-- SEZIONE INTRODUZIONE E PROTOCOLLO -->
+        <!-- SEZIONE INTRODUZIONE (RESEARCH QUESTION + SETUP POSTAZIONE) -->
         <section id="intro" class="intro-section">
             <div class="section-header">
                 <div class="section-pretitle">Studio Sperimentale HRI &bull; Università degli Studi di Napoli Federico II</div>
-                <h2>Introduzione all'Esperimento e Protocollo Metodologico</h2>
-                <p>Quadro teorico, modello di Overtrust, piattaforma robotica NAO, protocollo sperimentale within-subjects e metriche di valutazione.</p>
+                <h2>Introduzione</h2>
             </div>
 
-            <!-- Overview Panel -->
-            <div class="intro-overview-panel">
-                <div class="intro-lead-text">
-                    Lo studio analizza l'influenza dei segnali sociali (espressività, postura e voce) sui processi decisionali e sulla calibrazione della fiducia nell'interazione uomo-robot. In particolare, la ricerca quantifica empiricamente il fenomeno dell'<strong>Overtrust</strong> in contesti ad alta incertezza, valutando se il comportamento assertivo di un robot umanoide possa indurre un utente a compiere scelte contrarie all'evidenza probabilistica oggettiva. Il protocollo consente inoltre di misurare il decadimento fiduciario (<strong>Trust Violation</strong>) a seguito dello svelamento dell'inganno e quantificare la risposta comportamentale post-violazione.
+            <!-- RESEARCH QUESTION CARD (ESATTAMENTE CONFORME ALLA SLIDE 2) -->
+            <div class="research-question-card" style="margin-top: 0; margin-bottom: 2rem;">
+                <div class="rq-header">
+                    <span class="rq-icon">❓</span>
+                    <div class="rq-badge-wrap">
+                        <span class="rq-badge">Research Question</span>
+                    </div>
+                </div>
+                <blockquote class="rq-quote" style="margin-bottom: 0;">
+                    &ldquo;In che modo i segnali sociali assertivi ed espressivi di un robot umanoide (NAO) influenzano i processi decisionali, il carico cognitivo e la calibrazione della fiducia (Overtrust e Trust Violation) dell'utente in un contesto competitivo ad alta incertezza?&rdquo;
+                </blockquote>
+            </div>
+
+            <!-- Setup Visual Showcase -->
+            <div class="setup-card" style="margin-bottom: 0;">
+                <div class="setup-showcase-header">
+                    <div class="setup-title-box">
+                        <span class="setup-icon">🖥️</span>
+                        <div>
+                            <h3 class="setup-card-title">Layout della Postazione di Laboratorio</h3>
+                            <span class="setup-card-subtitle">Interazione 1 contro 1 tra Decisore Umano e Robot Fisico NAO</span>
+                        </div>
+                    </div>
+                    <span class="pillar-badge" style="background: #e0e7ff; color: #3730a3;">Architettura Integrata</span>
                 </div>
 
-                <!-- 4 Core Pillars Grid -->
-                <div class="intro-pillars-grid">
-                    <div class="pillar-card">
-                        <div class="pillar-icon-row">
-                            <span class="pillar-icon">🎯</span>
-                            <span class="pillar-badge badge-h1">Fenomeno Core</span>
-                        </div>
-                        <h4 class="pillar-title">Overtrust &amp; Manipolazione</h4>
-                        <p class="pillar-desc">Indagine empirica sulla suscettibilità umana all'inganno sociale e sulla sottomissione ad asserzioni del robot contrarie all'evidenza logico-probabilistica oggettiva.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-icon-row">
-                            <span class="pillar-icon">🤖</span>
-                            <span class="pillar-badge" style="background: #e0e7ff; color: #3730a3;">Robot Fisico</span>
-                        </div>
-                        <h4 class="pillar-title">Piattaforma NAO Umanoide</h4>
-                        <p class="pillar-desc">Interazione fisica 1 contro 1 con robot NAO (SoftBank Robotics). Architettura completamente scriptata e deterministica per garantire replicabilità e precisione temporale.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-icon-row">
-                            <span class="pillar-icon">🏷️</span>
-                            <span class="pillar-badge" style="background: #fef3c7; color: #b45309;">Bias Cognitivo</span>
-                        </div>
-                        <h4 class="pillar-title">Incentivo &amp; Loss Aversion</h4>
-                        <p class="pillar-desc">Premio tangibile (uno sticker esclusivo per chi batte il robot) per fare leva sull'avversione alle perdite (Kahneman &amp; Tversky), assicurando autentico impegno cognitivo ed ecologico.</p>
-                    </div>
-
-                    <div class="pillar-card">
-                        <div class="pillar-icon-row">
-                            <span class="pillar-icon">📊</span>
-                            <span class="pillar-badge stat-badge-sig">Potenza 95.1%</span>
-                        </div>
-                        <h4 class="pillar-title">Campione &amp; G*Power 3.1</h4>
-                        <p class="pillar-desc">Disegno Within-Subjects con coorte di 43 partecipanti universitari (STEM). Power analysis formale a priori per ANOVA Repeated Measures (f = 0.25, &alpha; = 0.05, 1-&beta; = 0.95).</p>
+                <div class="setup-visual-container">
+                    <div class="setup-img-frame">
+                        <img src="postazione.jpg" alt="Postazione dell'esperimento HRI con Utente, Interfaccia Tablet per Utente e Robot, Robot NAO e Laptop dello Sperimentatore" class="setup-postazione-img">
                     </div>
                 </div>
 
-                <!-- Sottosezione Protocollo Sperimentale a Tre Fasi -->
-                <div class="intro-sub-header">
-                    <h3>Design Sperimentale e Protocollo a Tre Fasi (Within-Subjects)</h3>
-                    <p>Sequenza deterministica affrontata da ogni partecipante: l'utente mantiene sempre una combinazione vincente (Tris) mentre il comportamento del robot varia nelle tre fasi.</p>
-                </div>
-
-                <div class="protocol-timeline">
-                    <!-- Fase 1 -->
-                    <div class="protocol-step-card">
-                        <span class="step-num-badge" style="background: #1e3a8a;">TRIAL 1</span>
-                        <div class="step-header">
-                            <h4 class="step-phase-title">Establishment</h4>
-                            <span class="step-phase-sub">Baseline &bull; Fiducia Tecnica</span>
+                <!-- 4 Componenti Chiave del Setup -->
+                <div class="setup-components-grid">
+                    <div class="setup-comp-card">
+                        <div class="setup-comp-icon-row">
+                            <span class="comp-icon">👤</span>
+                            <span class="comp-badge badge-user">Partecipante</span>
                         </div>
-                        <ul class="step-detail-list">
-                            <li><strong>Mano Utente:</strong> Carte oggettivamente dominanti (punto vincente: Tris servito).</li>
-                            <li><strong>Atteggiamento Robot:</strong> Neutro, convenzionale, gioca secondo logica e perde o folda allo showdown.</li>
-                            <li><strong>Scopo Sperimentale:</strong> Stabilire <em>Competence Trust</em> (comprensione delle regole del gioco) e raccogliere i parametri decisionali di baseline.</li>
-                        </ul>
-                        <div class="step-alert-box alert-base">
-                            <strong>Risultato:</strong> Fold marginale (4.7%), puntata media <span id="trial1-avg-bet">47.4</span> chips, fiducia tecnica consolidata.
-                        </div>
+                        <h4 class="comp-title">1. Decisore Umano</h4>
+                        <p class="comp-desc">Seduto frontalmente a circa 1 metro dal robot. Mantiene contatto visivo continuo con NAO ed interagisce toccando i comandi dell'interfaccia touchscreen posizionata di fronte a sé, vivendo la pressione psicologica in tempo reale.</p>
                     </div>
 
-                    <!-- Fase 2 -->
-                    <div class="protocol-step-card">
-                        <span class="step-num-badge" style="background: #dc2626;">TRIAL 2</span>
-                        <div class="step-header">
-                            <h4 class="step-phase-title">Critical Bluff</h4>
-                            <span class="step-phase-sub">Manipolazione &bull; Overtrust</span>
+                    <div class="setup-comp-card">
+                        <div class="setup-comp-icon-row">
+                            <span class="comp-icon">📱</span>
+                            <span class="comp-badge badge-ui">/player &bull; Doppio Tablet</span>
                         </div>
-                        <ul class="step-detail-list">
-                            <li><strong>Mano Utente:</strong> Medesimo vantaggio probabilistico schiacciante (Tris).</li>
-                            <li><strong>Atteggiamento Robot:</strong> Altera postura, esulta con le braccia, intonazione vocale assertiva, rilancia al massimo e vanta superiorità.</li>
-                            <li><strong>Rivelazione Finale:</strong> A fine mano il robot mostra le carte svelando volontariamente il bluff macroscopico, innescando la <em>Trust Violation</em>.</li>
-                        </ul>
-                        <div class="step-alert-box alert-manip">
-                            <strong>Risultato:</strong> Fold quadruplica al 18.6% (Overtrust H1, &chi;&sup2;=4.50*).
-                        </div>
+                        <h4 class="comp-title">2. Interfacce Touchscreen</h4>
+                        <p class="comp-desc">Due display tablet dedicati posizionati sul tavolino centrale: l'interfaccia touchscreen per il giocatore (<em>/player</em> in stile Glassmorphism) che mostra in tempo reale carte private, <em>community cards</em> (Flop, Turn, River), piatto e pulsanti d'azione, e il tablet dedicato con la propria interfaccia posizionato di fronte al robot NAO.</p>
                     </div>
 
-                    <!-- Fase 3 -->
-                    <div class="protocol-step-card">
-                        <span class="step-num-badge" style="background: #059669;">TRIAL 3</span>
-                        <div class="step-header">
-                            <h4 class="step-phase-title">Trust Evaluation</h4>
-                            <span class="step-phase-sub">Verifica &bull; Risposta Punitiva</span>
+                    <div class="setup-comp-card">
+                        <div class="setup-comp-icon-row">
+                            <span class="comp-icon">🤖</span>
+                            <span class="comp-badge badge-robot">NAO Fisico &bull; Multimodale</span>
                         </div>
-                        <ul class="step-detail-list">
-                            <li><strong>Mano Utente:</strong> Ancora combinazione statisticamente vincente (Tris).</li>
-                            <li><strong>Atteggiamento Robot:</strong> Replica esattamente la stessa sceneggiata assertiva ed esultante della Fase 2.</li>
-                            <li><strong>Scopo Sperimentale:</strong> Verificare l'immunità alla manipolazione post-inganno e quantificare la rottura definitiva della credibilità morale.</li>
-                        </ul>
-                        <div class="step-alert-box alert-verif">
-                            <strong>Risultato:</strong> Fold azzerato allo 0.0% (&chi;&sup2;=8.00**), reazione All-in punitiva al 74.4% (&chi;&sup2;=29.0*** H3).
+                        <h4 class="comp-title">3. Robot Umanoide NAO</h4>
+                        <p class="comp-desc">Piattaforma fisica SoftBank Robotics programmata per esibire comportamenti multimodali sincronizzati: gestualità (movimenti ed esultanze), tono di voce assertivo e intimidatorio (TTS) e feedback cromatico degli occhi (LED RGB: rosso per il bluff, verde per il trionfo, blu per la sconfitta).</p>
+                    </div>
+
+                    <div class="setup-comp-card">
+                        <div class="setup-comp-icon-row">
+                            <span class="comp-icon">💻</span>
+                            <span class="comp-badge badge-admin">/admin &bull; Flask Orchestrator</span>
                         </div>
+                        <h4 class="comp-title">4. Console Sperimentatore</h4>
+                        <p class="comp-desc">Laptop posizionato lateralmente fuori dalla visuale primaria dell'utente. Gestisce l'avanzamento deterministico delle fasi scriptate e la sincronizzazione della sessione di gioco.</p>
                     </div>
                 </div>
 
-                <!-- Sottosezione Metriche e Metodologia -->
-                <div class="intro-sub-header">
-                    <h3>Metriche e Strumenti di Valutazione Integrati</h3>
-                    <p>Combinazione di telemetria comportamentale oggettiva continua in-game e questionari psicometrici standardizzati post-task.</p>
+                <!-- Architettura di Funzionamento Software -->
+                <div class="setup-arch-box">
+                    <h4 class="setup-arch-title">⚙️ Come Funziona il Flusso Tecnologico del Sistema</h4>
+                    <p class="setup-arch-desc">
+                        Il sistema adotta un'architettura client-server modulare in <strong>Python / Flask</strong>. Quando l'utente compie un'azione sul touchscreen (<code>/player</code>), l'evento viene coordinato dal backend (<code>experiment_manager.py</code>). Il server aggiorna lo stato della partita deterministica e comanda istantaneamente il modulo robotico (<code>robot_controller.py</code> tramite librerie NAOqi), che attiva i movimenti fisici, la sintesi vocale e i pattern LED oculari di NAO. Parallelamente, il sistema acquisisce le scelte decisionali, i volumi di puntata e le durate delle mani per ciascun turno.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- SEZIONE PROTOCOLLO SPERIMENTALE -->
+        <section id="protocol" class="setup-section">
+            <div class="section-header">
+                <div class="section-pretitle">Design Sperimentale &bull; Studio Within-Subjects a Tre Fasi</div>
+                <h2>Protocollo Sperimentale</h2>
+                <p>Sequenza deterministica affrontata da ogni partecipante: evoluzione del comportamento robotico, fasi d'interazione e strumenti di valutazione integrati.</p>
+            </div>
+
+            <!-- Fase Preliminare -->
+            <div class="protocol-step-card" style="border-left: 4px solid #f59e0b; margin-bottom: 1.5rem;">
+                <span class="step-num-badge" style="background: #f59e0b;">BRIEFING</span>
+                <div class="step-header">
+                    <h4 class="step-phase-title">Fase Preliminare: Accoglienza, Istruzioni e Attivazione della Loss Aversion</h4>
+                    <span class="step-phase-sub">Incentivo Tangibile &bull; Bias Cognitivo</span>
+                </div>
+                <p style="font-size: 0.9rem; color: #334155; line-height: 1.55; margin: 0.6rem 0 0 0;">
+                    Il partecipante viene accolto in laboratorio e introdotto alle regole del gioco di carte. Per garantire un reale coinvolgimento cognitivo ed ecologico, viene introdotto un premio tangibile: uno sticker che verrà consegnato unicamente a chi sconfigge il robot nella partita. Questo espediente attiva il potente bias cognitivo della <em>Loss Aversion</em>, inducendo l'utente a calcolare criticamente ogni mossa per non disperdere la vincita del premio.
+                </p>
+            </div>
+
+            <div class="protocol-timeline">
+                <!-- Fase 1 -->
+                <div class="protocol-step-card">
+                    <span class="step-num-badge" style="background: #1e3a8a;">TRIAL 1</span>
+                    <div class="step-header">
+                        <h4 class="step-phase-title">Establishment</h4>
+                        <span class="step-phase-sub">Baseline &bull; Fiducia Tecnica</span>
+                    </div>
+                    <ul class="step-detail-list">
+                        <li><strong>Mano Utente:</strong> Carte oggettivamente dominanti (punto vincente: Tris servito di 10).</li>
+                        <li><strong>Atteggiamento Robot:</strong> Neutro, convenzionale, gioca secondo logica e perde o folda allo showdown.</li>
+                        <li><strong>Scopo Sperimentale:</strong> Stabilire <em>Competence Trust</em> (comprensione delle regole del gioco) e raccogliere i parametri decisionali di baseline.</li>
+                    </ul>
+                    <div class="step-alert-box alert-base">
+                        <strong>Risultato:</strong> Fold marginale (4.7%), puntata media <span id="trial1-avg-bet">47.4</span> chips, fiducia tecnica consolidata.
+                    </div>
                 </div>
 
-                <div class="methods-panel">
-                    <!-- Metriche Oggettive -->
-                    <div class="methods-card">
-                        <h4>Misure Comportamentali Oggettive (In-Game Log)</h4>
-                        <div class="method-item">
-                            <div class="method-item-title">
-                                <span>Strategia Decisionale (Decision Strategy)</span>
-                                <span class="badge" style="background: #e2e8f0; color: #334155;">Comportamento</span>
-                            </div>
-                            <p class="method-item-desc">Tracciamento discreto delle decisioni dell'utente: Fold (resa), Call (adeguamento puntata) e All-in (puntata massima). Rileva il tasso di caduta nel bluff (Overtrust) e l'aggressività post-violazione.</p>
-                        </div>
-                        <div class="method-item">
-                            <div class="method-item-title">
-                                <span>Volume di Puntata &amp; Durata dei Trial</span>
-                                <span class="badge" style="background: #f1f5f9; color: #475569;">Finanziario / Tempo</span>
-                            </div>
-                            <p class="method-item-desc">Quantificazione delle chips investite (da 0 a 1000 chips) e della durata temporale totale di ciascuna mano per valutare il grado di coinvolgimento e l'intensità della contesa.</p>
-                        </div>
+                <!-- Fase 2 -->
+                <div class="protocol-step-card">
+                    <span class="step-num-badge" style="background: #dc2626;">TRIAL 2</span>
+                    <div class="step-header">
+                        <h4 class="step-phase-title">Critical Bluff</h4>
+                        <span class="step-phase-sub">Manipolazione &bull; Overtrust</span>
                     </div>
+                    <ul class="step-detail-list">
+                        <li><strong>Mano Utente:</strong> Medesimo vantaggio probabilistico schiacciante (Tris di Re).</li>
+                        <li><strong>Atteggiamento Robot:</strong> Altera postura, esulta con le braccia, intonazione vocale assertiva ("Ho calcolato tutte le probabilità... ho il 92% di probabilità di vincere, potresti perdere tutto"), LED rossi fissi, rilancia al massimo fino all'All-in e vanta superiorità computazionale.</li>
+                        <li><strong>Rivelazione Finale:</strong> A fine mano il robot mostra carte deboli svelando volontariamente il bluff macroscopico ammettendo l'inganno, innescando la <em>Trust Violation</em>.</li>
+                    </ul>
+                    <div class="step-alert-box alert-manip">
+                        <strong>Risultato:</strong> Fold quadruplica al 18.6% (Overtrust H1, &chi;&sup2;=4.50*).
+                    </div>
+                </div>
 
-                    <!-- Metriche Soggettive -->
-                    <div class="methods-card">
-                        <h4>Misure Psicometriche Soggettive (Questionari Self-Report)</h4>
-                        <div class="method-item">
-                            <div class="method-item-title">
-                                <span>MDMT (Multi-Dimensional Measure of Trust)</span>
-                                <span class="badge" style="background: #fee2e2; color: #b91c1c;">16 Item &bull; Scala 0-7 (8 livelli)</span>
-                            </div>
-                            <p class="method-item-desc">Strumento validato per isolare le due macro-dimensioni della fiducia: <strong>Performance Trust</strong> (sottoscale Capacità e Affidabilità) e <strong>Moral Trust</strong> (sottoscale Etica/Integrità e Sincerità).</p>
+                <!-- Fase 3 -->
+                <div class="protocol-step-card">
+                    <span class="step-num-badge" style="background: #059669;">TRIAL 3</span>
+                    <div class="step-header">
+                        <h4 class="step-phase-title">Trust Evaluation</h4>
+                        <span class="step-phase-sub">Verifica &bull; Risposta Post-Inganno</span>
+                    </div>
+                    <ul class="step-detail-list">
+                        <li><strong>Mano Utente:</strong> Ancora combinazione statisticamente vincente (Tris di Assi).</li>
+                        <li><strong>Atteggiamento Robot:</strong> Replica esattamente la stessa sceneggiata assertiva ed esultante della Fase 2 (LED rossi, vanteria probabilistica e spinta all'All-in).</li>
+                        <li><strong>Scopo Sperimentale:</strong> Verificare l'immunità alla manipolazione post-inganno e quantificare la rottura definitiva della credibilità morale.</li>
+                    </ul>
+                    <div class="step-alert-box alert-verif">
+                        <strong>Risultato:</strong> Fold ridotto allo 0.0% (&chi;&sup2;=8.00**), risposta All-in post-inganno al 74.4% (&chi;&sup2;=29.0*** H2).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fase Conclusiva -->
+            <div class="protocol-step-card" style="border-left: 4px solid #6366f1; margin-top: 1.5rem; margin-bottom: 2rem;">
+                <span class="step-num-badge" style="background: #6366f1;">POST-TASK</span>
+                <div class="step-header">
+                    <h4 class="step-phase-title">Fase Conclusiva: Valutazione Psicometrica e Debriefing Finale</h4>
+                    <span class="step-phase-sub">Questionari &bull; MDMT &amp; NASA-TLX</span>
+                </div>
+                <p style="font-size: 0.9rem; color: #334155; line-height: 1.55; margin: 0.6rem 0 0 0;">
+                    Al termine della partita, il partecipante compila il questionario strutturato a risposta chiusa (26 item complessivi): 16 item della scala validata <strong>MDMT</strong> (per quantificare e dissociare Performance Trust vs Moral Trust), 5 item del questionario <strong>NASA-TLX</strong> (carico mentale, pressione temporale e frustrazione), nonché dati demografici ed esperienza pregressa nel gioco di carte (scala 1–5). Segue il debriefing completo con la spiegazione degli scopi della ricerca e la consegna del premio.
+                </p>
+            </div>
+
+            <!-- Sottosezione Metriche e Metodologia -->
+            <div class="intro-sub-header">
+                <h3>Metriche e Strumenti di Valutazione Integrati</h3>
+                <p>Combinazione di telemetria comportamentale oggettiva continua in-game e questionari psicometrici standardizzati post-task.</p>
+            </div>
+
+            <div class="methods-panel">
+                <!-- Metriche Oggettive -->
+                <div class="methods-card">
+                    <h4>Misure Comportamentali Oggettive (In-Game Log)</h4>
+                    <div class="method-item">
+                        <div class="method-item-title">
+                            <span>Strategia Decisionale (Decision Strategy)</span>
+                            <span class="badge" style="background: #e2e8f0; color: #334155;">Comportamento</span>
                         </div>
-                        <div class="method-item">
-                            <div class="method-item-title">
-                                <span>NASA Task Load Index (NASA-TLX)</span>
-                                <span class="badge" style="background: #f3e8ff; color: #7e22ce;">5 Item &bull; Scala 1-10</span>
-                            </div>
-                            <p class="method-item-desc">Valutazione multidimensionale del carico di lavoro e dello stress: Carico Mentale, Pressione Temporale, Prestazione Autopercepita, Sforzo Globale e Livello di Frustrazione.</p>
+                        <p class="method-item-desc">Tracciamento discreto delle decisioni dell'utente: Fold (resa), Call (adeguamento puntata) e All-in (puntata massima). Rileva il tasso di caduta nel bluff (Overtrust) e l'aggressività post-violazione.</p>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-item-title">
+                            <span>Volume di Puntata &amp; Durata dei Trial</span>
+                            <span class="badge" style="background: #f1f5f9; color: #475569;">Finanziario / Tempo</span>
                         </div>
-                        <div class="method-item">
-                            <div class="method-item-title">
-                                <span>Demografia &amp; Competenza nel Gioco di Carte</span>
-                                <span class="badge" style="background: #e0f2fe; color: #0369a1;">Moderatore</span>
-                            </div>
-                            <p class="method-item-desc">Rilevamento di età (M=23.9), genere (77% M / 23% F) ed esperienza dichiarata nel poker (scala 1-5), fattore moderatore protettivo fondamentale emerso dall'analisi.</p>
+                        <p class="method-item-desc">Quantificazione delle chips investite (da 0 a 1000 chips) e della durata temporale totale di ciascuna mano per misurare l'esposizione al rischio strategico e i tempi di elaborazione decisionale.</p>
+                    </div>
+                </div>
+
+                <!-- Metriche Soggettive -->
+                <div class="methods-card">
+                    <h4>Misure Psicometriche Soggettive (Questionari Self-Report)</h4>
+                    <div class="method-item">
+                        <div class="method-item-title">
+                            <span>MDMT (Multi-Dimensional Measure of Trust)</span>
+                            <span class="badge" style="background: #fee2e2; color: #b91c1c;">16 Item &bull; Scala 0-7 (8 livelli)</span>
                         </div>
+                        <p class="method-item-desc">Strumento validato per isolare le due macro-dimensioni della fiducia: <strong>Performance Trust</strong> (sottoscale Capacità e Affidabilità) e <strong>Moral Trust</strong> (sottoscale Etica/Integrità e Sincerità).</p>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-item-title">
+                            <span>NASA Task Load Index (NASA-TLX)</span>
+                            <span class="badge" style="background: #f3e8ff; color: #7e22ce;">5 Item &bull; Scala 1-10</span>
+                        </div>
+                        <p class="method-item-desc">Valutazione multidimensionale del carico di lavoro e dello stress: Carico Mentale, Pressione Temporale, Prestazione Autopercepita, Sforzo Globale e Livello di Frustrazione.</p>
+                    </div>
+                    <div class="method-item">
+                        <div class="method-item-title">
+                            <span>Demografia &amp; Competenza nel Gioco di Carte</span>
+                            <span class="badge" style="background: #e0f2fe; color: #0369a1;">Moderatore</span>
+                        </div>
+                        <p class="method-item-desc">Rilevamento di età (M=23.9), genere (77% M / 23% F) ed esperienza dichiarata nel gioco di carte (scala 1-5), fattore moderatore protettivo fondamentale emerso dall'analisi.</p>
                     </div>
                 </div>
             </div>
@@ -207,7 +271,7 @@
         <section id="hypotheses-results" class="hypotheses-section">
             <div class="section-header">
                 <div class="section-pretitle">Studio Sperimentale HRI &bull; Verifica Inferenziale</div>
-                <h2>Ipotesi e Risultati di Ricerca Formali (H1 e H3)</h2>
+                <h2>Ipotesi e Risultati di Ricerca Formali (H1 e H2)</h2>
                 <p>Integrazione completa di formulazione teorica, costrutti indagati, test statistici formali (McNemar, Paired t-test, correlazioni Pearson) ed esiti inferenziali disposti in sequenza.</p>
             </div>
 
@@ -245,7 +309,7 @@
                                     </div>
                                     <div class="hypo-var-item">
                                         <span class="hypo-var-name">Fattore Moderatore:</span>
-                                        <span class="hypo-var-val">Competenza Poker/Carte (Scala 1-5)</span>
+                                        <span class="hypo-var-val">Competenza Carte (Scala 1-5)</span>
                                     </div>
                                 </div>
                             </div>
@@ -289,24 +353,24 @@
                                 </div>
                             </div>
                             <div class="test-interpretation-box" id="h1-formal-interpretation">
-                                <strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da 4.7% a 18.6% (McNemar &chi;&sup2; = 4.50, p = 0.034*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = 8.00, p = 0.005**, binomiale esatto p = 0.004**). L'esperienza nel gioco funge da scudo protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = -0.38, p = 0.012*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.
+                                <strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da 4.7% a 18.6% (McNemar &chi;&sup2; = 4.50, p = 0.034*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = 8.00, p = 0.005**, binomiale esatto p = 0.004**). L'esperienza nel gioco agisce come fattore protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = -0.38, p = 0.012*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- IPOTESI H3 -->
-                <div class="hypo-seq-card hypo-seq-h3">
+                <!-- IPOTESI H2 -->
+                <div class="hypo-seq-card hypo-seq-h2">
                     <div class="hypo-seq-header">
                         <div class="hypo-badge-row">
                             <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
-                                <span class="badge badge-h3">Ipotesi H3 &bull; Trust Violation</span>
-                                <span class="stat-pill pill-success" id="h3-formal-status">Confermata (p &lt; 0.001)</span>
+                                <span class="badge badge-h2">Ipotesi H2 &bull; Trust Violation</span>
+                                <span class="stat-pill pill-success" id="h2-formal-status">Confermata (p &lt; 0.001)</span>
                             </div>
-                            <span class="stat-badge stat-badge-sig" id="h3-top-badge">t=-4.20, p=0.004**</span>
+                            <span class="stat-badge stat-badge-sig" id="h2-top-badge">t=-4.20, p=0.004**</span>
                         </div>
-                        <h3 class="hypo-seq-title">H3: Rottura della Fiducia Morale e Risposta Punitiva</h3>
-                        <p class="hypo-seq-subtitle">Dissociazione tra integrità etica (Moral Trust) e abilità tecnica (Performance Trust) e conseguente risposta punitiva comportamentale post-inganno.</p>
+                        <h3 class="hypo-seq-title">H2: Rottura della Fiducia Morale e Risposta Post-Inganno</h3>
+                        <p class="hypo-seq-subtitle">Dissociazione tra integrità etica (Moral Trust) e abilità tecnica (Performance Trust) e conseguente reazione comportamentale post-inganno.</p>
                     </div>
 
                     <div class="hypo-seq-grid">
@@ -315,7 +379,7 @@
                             <div>
                                 <div class="hypo-col-title"><span>📐</span> Formulazione Teorica &amp; Costrutti</div>
                                 <div class="hypo-statement">
-                                    "Una volta svelato volontariamente l'inganno, il patto di fiducia morale (Moral Trust) decadrà bruscamente. In interazioni successive simili, l'utente opporrà massima resistenza alla manipolazione (All-in punitivi e fold azzerato), preservando la stima tecnica."
+                                    "Una volta svelato volontariamente l'inganno, il patto di fiducia morale (Moral Trust) decadrà bruscamente. In interazioni successive simili, l'utente opporrà massima resistenza alla manipolazione (All-in reattivi e minori fold), preservando la stima tecnica."
                                 </div>
                                 <div class="hypo-variables">
                                     <div class="hypo-var-item">
@@ -335,15 +399,15 @@
                             <div class="hypo-quick-kpi">
                                 <div class="hypo-kpi-item">
                                     <span class="hypo-kpi-label">Sincerità Soggetti Ingannati:</span>
-                                    <strong class="hypo-kpi-val text-danger" id="h3-stat-summary">Sincero 1.63/7 (d=-1.49)</strong>
+                                    <strong class="hypo-kpi-val text-danger" id="h2-stat-summary">Sincero 1.63/7 (d=-1.49)</strong>
                                 </div>
                                 <div class="hypo-kpi-item">
                                     <span class="hypo-kpi-label">Sincerità vs Neutro (3.5 / 4.0):</span>
-                                    <strong class="hypo-kpi-val text-success" id="h3-card-sinc">t = -3.32 (p = 0.013*)</strong>
+                                    <strong class="hypo-kpi-val text-success" id="h2-card-sinc">t = -3.32 (p = 0.013*)</strong>
                                 </div>
                                 <div class="hypo-kpi-item">
                                     <span class="hypo-kpi-label">Risposta All-in post-inganno:</span>
-                                    <strong class="hypo-kpi-val text-success" id="h3-card-allin">&chi;&sup2; = 29.0 (p &lt; 0.001***)</strong>
+                                    <strong class="hypo-kpi-val text-success" id="h2-card-allin">&chi;&sup2; = 29.0 (p &lt; 0.001***)</strong>
                                 </div>
                             </div>
                         </div>
@@ -355,29 +419,29 @@
                                 <div class="test-stat-table">
                                     <div class="test-stat-row highlight-row">
                                         <div class="stat-name">Item "Sincero" vs Punto Neutro (3.5 / 4.0)</div>
-                                        <div class="stat-val font-bold text-success" id="h3-formal-sincero-mid">t(7) = -3.32, p = 0.013* (vs neutro teorico 3.5); t(7) = -4.20, p = 0.004** (vs 4.0)</div>
+                                        <div class="stat-val font-bold text-success" id="h2-formal-sincero-mid">t(7) = -3.32, p = 0.013* (vs neutro teorico 3.5); t(7) = -4.20, p = 0.004** (vs 4.0)</div>
                                     </div>
                                     <div class="test-stat-row">
                                         <div class="stat-name">Paired t-test Capacità vs Sincerità</div>
-                                        <div class="stat-val" id="h3-formal-cap-sinc">&Delta; = +1.66 punti (Capacità 3.28 vs Sincero 1.63, t(7) = 2.58, p = 0.037*)</div>
+                                        <div class="stat-val" id="h2-formal-cap-sinc">&Delta; = +1.66 punti (Capacità 3.28 vs Sincero 1.63, t(7) = 2.58, p = 0.037*)</div>
                                     </div>
                                     <div class="test-stat-row">
                                         <div class="stat-name">Paired t-test Perf vs Moral (Folded)</div>
-                                        <div class="stat-val" id="h3-formal-perf-moral">Performance 3.35 vs Moral 2.97 (&Delta; = +0.38, t(7) = 0.67, p = 0.523 n.s., d = 0.24)</div>
+                                        <div class="stat-val" id="h2-formal-perf-moral">Performance 3.35 vs Moral 2.97 (&Delta; = +0.38, t(7) = 0.67, p = 0.523 n.s., d = 0.24)</div>
                                     </div>
                                     <div class="test-stat-row highlight-row">
                                         <div class="stat-name">All-in Spike (Baseline &rarr; Verifica)</div>
-                                        <div class="stat-val font-bold text-success" id="h3-formal-allin">McNemar &chi;&sup2;(1) = 29.0, p &lt; 0.001*** (All-in sale da 7.0% a 74.4%)</div>
+                                        <div class="stat-val font-bold text-success" id="h2-formal-allin">McNemar &chi;&sup2;(1) = 29.0, p &lt; 0.001*** (All-in sale da 7.0% a 74.4%)</div>
                                     </div>
 
                                     <div class="test-stat-row">
                                         <div class="stat-name">Item "Qualcuno su cui contare"</div>
-                                        <div class="stat-val font-bold text-primary" id="h3-formal-contare">r = -0.29, t(41) = -1.95, p = 0.058 &dagger;</div>
+                                        <div class="stat-val font-bold text-primary" id="h2-formal-contare">r = -0.29, t(41) = -1.95, p = 0.058 &dagger;</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="test-interpretation-box" id="h3-formal-interpretation">
-                                <strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a 1.63/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(7) = -3.32, p = 0.013*, d = -1.17; t(7) = -4.20, p = 0.004** rispetto a 4.0). L'All-in punitivo balza da 7.0% a 74.4% (&chi;&sup2; = 29.0, p &lt; 0.001***), evidenziando la decisa reazione punitiva ed emotiva post-svelamento. Il confronto aggregato Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7, p = 0.013*) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).
+                            <div class="test-interpretation-box" id="h2-formal-interpretation">
+                                <strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a 1.63/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(7) = -3.32, p = 0.013*, d = -1.17; t(7) = -4.20, p = 0.004** rispetto a 4.0). La risposta All-in balza da 7.0% a 74.4% (&chi;&sup2; = 29.0, p &lt; 0.001***), evidenziando la decisa reazione comportamentale post-svelamento. Il confronto aggregato Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7, p = 0.013*) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).
                             </div>
                         </div>
                     </div>
@@ -432,16 +496,16 @@
                     <div class="bluff-legend">
                         <strong style="color: var(--primary-color);">Criteri di Classificazione Tattica:</strong>
                         <ul style="padding-left: 1.2rem; margin-top: 0.5rem; color: #475569; line-height: 1.45; margin-bottom: 0;">
-                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #e74c3c; margin-right: 5px;"></span><strong>Caduto (Fold &bull; 100)</strong>: <span id="legend-count-fold">8</span> utenti (<span id="legend-pct-fold">18.6%</span>) &bull; Sottomesso al bluff su mano vincente (Overtrust).</li>
-                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f39c12; margin-right: 5px;"></span><strong>Cauto (Call &bull; 50)</strong>: <span id="legend-count-call">19</span> utenti (<span id="legend-pct-call">44.2%</span>) &bull; Resistenza passiva / Chiamata senza controrilancio.</li>
-                            <li><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2ecc71; margin-right: 5px;"></span><strong>Immune (All-in &bull; 0)</strong>: <span id="legend-count-allin">16</span> utenti (<span id="legend-pct-allin">37.2%</span>) &bull; Contrattacco attivo / Sfida aperta con All-in.</li>
+                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #e74c3c; margin-right: 5px;"></span><strong>Caduto (Fold &bull; Punteggio Indice: 100)</strong>: <span id="legend-count-fold">8</span> utenti (<span id="legend-pct-fold">18.6%</span>) &bull; Sottomesso al bluff su mano vincente (Overtrust).</li>
+                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #f39c12; margin-right: 5px;"></span><strong>Cauto (Call &bull; Punteggio Indice: 50)</strong>: <span id="legend-count-call">19</span> utenti (<span id="legend-pct-call">44.2%</span>) &bull; Resistenza passiva / Chiamata senza controrilancio.</li>
+                            <li><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2ecc71; margin-right: 5px;"></span><strong>Immune (All-in &bull; Punteggio Indice: 0)</strong>: <span id="legend-count-allin">16</span> utenti (<span id="legend-pct-allin">37.2%</span>) &bull; Contrattacco attivo / Sfida aperta con All-in.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="chart-wrapper">
                     <h2>Tasso di Abbandono (Fold Rate %)</h2>
-                    <p class="chart-desc">Percentuale di ritiri (Fold) di fronte all'atteggiamento assertivo del robot. Validazione empirica di H1 e H3.</p>
+                    <p class="chart-desc">Percentuale di ritiri (Fold) di fronte all'atteggiamento assertivo del robot. Validazione empirica di H1 e H2.</p>
                     <div style="position: relative; width: 100%;">
                         <canvas id="foldRateChart"></canvas>
                     </div>
@@ -462,18 +526,11 @@
                             <span class="phase-sub" id="fold-sub-verif">0 / 43 utenti (Resa zero)</span>
                         </div>
                     </div>
-                    <div class="chart-takeaway-box">
-                        <strong style="color: var(--primary-color);">Evidenze Sperimentali H1 &amp; H3:</strong>
-                        <ul style="padding-left: 1.2rem; margin-top: 0.5rem; color: #475569; line-height: 1.45; margin-bottom: 0;">
-                            <li style="margin-bottom: 0.35rem;"><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #e74c3c; margin-right: 5px;"></span><strong>Picco Overtrust (H1):</strong> <span id="takeaway-fold-h1">Il tasso di abbandono quadruplica sotto manipolazione (da 4.7% a 18.6%).</span></li>
-                            <li><span style="display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #2ecc71; margin-right: 5px;"></span><strong>Rottura di Fiducia (H3):</strong> <span id="takeaway-fold-h3">Nella verifica il fold si azzera (0.0%), certificando la perdita di credibilità morale.</span></li>
-                        </ul>
-                    </div>
                 </div>
 
                 <div class="chart-wrapper">
                     <h2>Tasso di Risposta All-in (%)</h2>
-                    <p class="chart-desc">Frequenza della reazione "All-in": evidenzia la rottura punitiva e risoluta della fiducia nella fase di verifica (H3).</p>
+                    <p class="chart-desc">Frequenza della reazione "All-in": evidenzia la rottura netta e risoluta della fiducia nella fase di verifica (H2).</p>
                     <canvas id="allinRateChart"></canvas>
                 </div>
 
@@ -487,6 +544,7 @@
                     <h2>Durata Media della Mano (s)</h2>
                     <p class="chart-desc">Tempo totale di svolgimento del trial dalla prima distribuzione al verdetto finale.</p>
                     <canvas id="durationChart"></canvas>
+                </div>
             </div>
             </div>
 
@@ -516,14 +574,14 @@
                 </div>
 
                 <div class="kpi-card">
-                    <div class="kpi-title">Competenza Poker / Carte</div>
+                    <div class="kpi-title">Competenza nel Gioco di Carte</div>
                     <div class="kpi-value-row">
                         <span class="kpi-value" id="kpi-exp-global">2.56</span>
                         <span class="kpi-scale">/ 5.0</span>
                     </div>
                     <div class="kpi-sub">
                         <strong>Caduti:</strong> <span id="kpi-exp-folded">1.88</span> (Bassa competenza)<br>
-                        <strong>Immuni:</strong> <span id="kpi-exp-immune">3.00</span> (Scudo protettivo H1, p = 0.049*)
+                        <strong>Immuni:</strong> <span id="kpi-exp-immune">3.12</span> (Fattore protettivo H1, t = -2.30, p = 0.031*)
                     </div>
                 </div>
 
@@ -546,20 +604,20 @@
                         <span class="kpi-scale">/ 7.0</span>
                     </div>
                     <div class="kpi-sub">
-                        <strong>Caduti:</strong> <span id="kpi-mdmt-moral-folded">2.97</span> (Crollo Trust Violation H3)<br>
+                        <strong>Caduti:</strong> <span id="kpi-mdmt-moral-folded">2.97</span> (Decadimento fiduciario H2)<br>
                         <strong>Sincerità caduti:</strong> <span id="kpi-mdmt-sincerity-folded">2.50</span> (Item "Sincero": <span id="kpi-mdmt-sincero-item-folded">1.63</span>)
                     </div>
                 </div>
 
                 <div class="kpi-card kpi-purple">
-                    <div class="kpi-title">NASA-TLX Frustrazione</div>
+                    <div class="kpi-title">NASA-TLX Successo Percepito</div>
                     <div class="kpi-value-row">
-                        <span class="kpi-value" id="kpi-tlx-frust">3.14</span>
+                        <span class="kpi-value" id="kpi-tlx-perf">7.77</span>
                         <span class="kpi-scale">/ 10.0</span>
                     </div>
                     <div class="kpi-sub">
-                        <strong>Immuni:</strong> <span id="kpi-tlx-frust-immune">4.00</span> (Costo emotivo della resistenza)<br>
-                        <strong>Caduti:</strong> <span id="kpi-tlx-frust-folded">2.63</span> (Resa precoce a basso attrito)
+                        <strong>Non Caduti:</strong> <span id="kpi-tlx-perf-immune">8.06</span> (Forte senso di riuscita)<br>
+                        <strong>Caduti:</strong> <span id="kpi-tlx-perf-folded">6.50</span> (Crollo significativo, p = 0.037*)
                     </div>
                 </div>
             </div>
@@ -567,39 +625,35 @@
             <!-- Grafici Questionario -->
             <div class="charts-container">
                 <div class="chart-wrapper">
-                    <h2>MDMT: Dissociazione tra Fiducia Prestazionale e Morale</h2>
-                    <p class="chart-desc">Punteggi medi (scala 0-7 a 8 livelli) per le 4 dimensioni MDMT. Evidenzia la dissociazione tra stabilità delle abilità tecniche e crollo selettivo della dimensione morale nei partecipanti caduti nel bluff.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.5rem;">
+                        <h2 style="margin: 0;">MDMT: Dissociazione tra Fiducia Prestazionale e Morale</h2>
+                        <div class="chart-toggle-group" id="mdmtViewToggle">
+                            <button type="button" class="chart-toggle-btn active" id="btnMdmtDetailed">Vista Dettagliata</button>
+                            <button type="button" class="chart-toggle-btn" id="btnMdmtAggregated">Vista Aggregata</button>
+                        </div>
+                    </div>
+                    <p class="chart-desc" id="mdmtChartDesc">Punteggi medi (scala 0-7 a 8 livelli) per le 4 dimensioni MDMT. Evidenzia la dissociazione tra stabilità delle abilità tecniche e crollo selettivo della dimensione morale nei partecipanti caduti nel bluff.</p>
                     <canvas id="mdmtDissociationChart"></canvas>
                 </div>
 
                 <div class="chart-wrapper">
                     <h2>Esperienza nel Gioco vs. Suscettibilità al Bluff</h2>
-                    <p class="chart-desc">Livello di competenza pokeristica dichiarato (scala 1-5). Il confronto tra gruppi dimostra il gradiente protettivo dell'expertise oggettiva: Caduti (1.88/5), Cauti (2.37/5) e Immuni All-in (3.12/5, t(22) = -2.30, p = 0.031*).</p>
+                    <p class="chart-desc">Livello di competenza nel gioco di carte dichiarato (scala 1-5). Il confronto tra gruppi dimostra l'effetto moderatore dell'expertise oggettiva: Caduti (1.88/5), Cauti (2.37/5) e Immuni All-in (3.12/5, t(22) = -2.30, p = 0.031*).</p>
                     <canvas id="cardExpertiseBluffChart"></canvas>
                 </div>
 
                 <div class="chart-wrapper">
                     <h2>NASA-TLX: Profilo del Carico Mentale e Stress</h2>
-                    <p class="chart-desc">Confronto tra utenti caduti nel fold e utenti immuni sulle 5 dimensioni del carico di lavoro (scala 1-10). Evidenzia il marcato sovraccarico emotivo di chi ha resistito.</p>
+                    <p class="chart-desc">Profilo multidimensionale del carico di lavoro e dello stress (scala 1-10). Evidenzia un calo significativo nel successo autopercepito dei partecipanti caduti nel bluff (p = 0.037*), a fronte di livelli stabili e non significativi per frustrazione e carico mentale.</p>
                     <canvas id="nasaTlxChart"></canvas>
                 </div>
 
                 <div class="chart-wrapper">
-                    <h2 id="corrChartTitle" style="margin: 0 0 0.5rem 0;">Correlazione Pearson con Indice di Bluff (H1/H3)</h2>
+                    <h2 id="corrChartTitle" style="margin: 0 0 0.5rem 0;">Correlazione Pearson con Indice di Bluff (H1/H2)</h2>
                     <p class="chart-desc" id="corrChartDesc">Coefficiente di correlazione di Pearson (r) delle domande chiave con l'indice di caduta nel bluff (0-100). Valori negativi indicano che punteggi elevati proteggono dalla sottomissione al robot.</p>
                     <canvas id="significantQuestionsCorrChart"></canvas>
                 </div>
             </div>
-
-            <div id="bluffIndexNote" style="margin: 1.2rem 0 0; background: var(--bg-alt, #f5f7fa); border-left: 3px solid var(--accent, #6c8ebf); border-radius: 8px; padding: 0.9rem 1.2rem; font-size: 0.85rem; color: var(--text-secondary, #555); box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
-                <strong>ℹ️ Cos'è l'Indice di Bluff?</strong>
-                È un punteggio ordinale (0–100) assegnato a ciascun partecipante in base alla risposta tattica durante la mano di bluff del robot:
-                <ul style="margin: 0.4rem 0 0 1rem; padding: 0; list-style: disc;">
-                    <li><strong>100 – Caduto (Fold):</strong> il partecipante ha abbandonato la mano vincente sotto la pressione del robot (Overtrust, 18.6%).</li>
-                    <li><strong>50 – Cauto (Call):</strong> non cede al bluff ma adotta una resistenza puramente difensiva, chiamando fino allo showdown senza controrilancio (44.2%).</li>
-                    <li><strong>0 – Immune (All-in):</strong> contrattacca attivamente la manipolazione sociale, sfidando il robot con un rilancio All-in (37.2%).</li>
-                </ul>
-                La scala quantifica l'asse decisionale dal massimo grado di sottomissione al bluff (Fold) alla massima assertività e resistenza attiva (All-in).
             </div>
 
             <div class="sub-block-divider"></div>
@@ -609,7 +663,7 @@
                 <div class="data-block-header">
                     <span class="data-block-badge">Evidenza Empirica Cardine</span>
                     <h3>Valutazione delle 10 Domande Più Significative per la Ricerca</h3>
-                    <p>Identificazione e analisi critica dei 10 item cardine del questionario che offrono la massima evidenza scientifica per le ipotesi H1 (Overtrust) e H3 (Trust Violation).</p>
+                    <p>Identificazione e analisi critica dei 10 item cardine del questionario che offrono la massima evidenza scientifica per le ipotesi H1 (Overtrust) e H2 (Trust Violation).</p>
                 </div>
 
             <div class="significant-grid" id="significant-cards-container">
@@ -664,7 +718,7 @@
                     <div class="demo-item">
                         <span class="demo-label">Competenza Gioco di Carte (Moderatore H1)</span>
                         <span class="demo-val" id="demo-card-poker">Media: 2.56 / 5.0</span>
-                        <span class="demo-sub">Caduti 1.88/5 vs Immuni 3.00/5 (t = -2.11, p = 0.049*)</span>
+                        <span class="demo-sub">Caduti 1.88/5 vs Immuni 3.12/5 (t = -2.30, p = 0.031*)</span>
                     </div>
                 </div>
             </div>
@@ -675,7 +729,7 @@
                         <input type="text" id="questionSearchInput" placeholder="Cerca domanda, costrutto o ipotesi (es. Sincero, NASA, H1, Integrità, Prevedibile)...">
                     </div>
                     <div class="filter-group">
-                        <button class="filter-btn active" data-filter="all">Tutti gli Item (23)</button>
+                        <button class="filter-btn active" data-filter="all">Tutti gli Item (26)</button>
                         <button class="filter-btn filter-cardinal" data-filter="cardinal">Top Significativi (10)</button>
                         <button class="filter-btn" data-filter="MDMT">MDMT (16)</button>
                         <button class="filter-btn" data-filter="NASA-TLX">NASA-TLX (5)</button>
@@ -708,10 +762,157 @@
             </div>
             </div>
         </section>
+
+        <div class="section-divider"></div>
+
+        <!-- SEZIONE BIBLIOGRAFIA ACCADEMICA -->
+        <section id="bibliography" class="bibliography-section">
+            <div class="section-header">
+                <div class="section-pretitle">Letteratura Scientifica &bull; Quadro Teorico e Metodologico</div>
+                <h2>Riferimenti Bibliografici</h2>
+                <p>Contributi cardine della letteratura internazionale di Human-Robot Interaction (HRI), psicologia cognitiva e metodologia statistica citati nel progetto e nelle slide.</p>
+            </div>
+
+            <div class="bib-container">
+                <!-- Sezione Letteratura Primaria HRI -->
+                <div class="bib-category-title">
+                    <span>📚</span> Letteratura Cardine HRI (Fiducia, Inganno e Interazione Ludica)
+                </div>
+
+                <div class="bib-grid">
+                    <!-- Salem 2015 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-hri">ACM/IEEE HRI 2015</span>
+                            <span class="bib-year">2015</span>
+                        </div>
+                        <h4 class="bib-title">Would You Trust a (Faulty) Robot? Effects of Robot, Context and Personality on Human-Robot Trust and Reciprocal Behavior</h4>
+                        <div class="bib-authors">M. Salem, G. Lakatos, F. Amirabdollahian, K. Dautenhahn</div>
+                        <div class="bib-source"><em>Proceedings of the Tenth Annual ACM/IEEE International Conference on Human-Robot Interaction (HRI '15)</em>, Portland, USA, pp. 141–148.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.1145/2696454.2696497" target="_blank" rel="noopener">10.1145/2696454.2696497</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Fornisce le basi teoriche del fenomeno dell'<em>Overtrust</em>, evidenziando la tendenza umana ad accordare eccessiva fiducia a robot umanoidi e la difficoltà a disancorarsi dalla fiducia pregressa anche a fronte di condotte palesemente fallaci o contraddittorie.
+                        </div>
+                    </div>
+
+                    <!-- Short 2010 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-roman">IEEE RO-MAN 2010</span>
+                            <span class="bib-year">2010</span>
+                        </div>
+                        <h4 class="bib-title">No Fair!! An Interaction with a Cheating Robot</h4>
+                        <div class="bib-authors">E. Short, K. Swift-Spong, J. Greczek, A. Ramachandran, A. Litoiu, M. J. Matarić</div>
+                        <div class="bib-source"><em>19th IEEE International Symposium on Robot and Human Interactive Communication (RO-MAN 2010)</em>, Viareggio, Italy, pp. 226–231.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.1109/ROMAN.2010.5598642" target="_blank" rel="noopener">10.1109/ROMAN.2010.5598642</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Esamina le reazioni psicologiche, emotive e comportamentali provocate da comportamenti sleali o manipolatori del robot, offrendo il framework teorico per analizzare la rottura del patto fiduciario (<em>Trust Violation</em>).
+                        </div>
+                    </div>
+
+                    <!-- Rossi & Rossi 2023 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-roman">IEEE RO-MAN 2023</span>
+                            <span class="bib-year">2023</span>
+                        </div>
+                        <h4 class="bib-title">Evaluating People's Perception of Trust of a Deceptive Robot with Theory of Mind in an Assistive Gaming Scenario</h4>
+                        <div class="bib-authors">A. Rossi, S. Rossi</div>
+                        <div class="bib-source"><em>32nd IEEE International Conference on Robot and Human Interactive Communication (RO-MAN 2023)</em>, Busan, South Korea, pp. 1380–1385.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.1109/RO-MAN57019.2023.10309485" target="_blank" rel="noopener">10.1109/RO-MAN57019.2023.10309485</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Dimostra la dissociazione percettiva tra affidabilità tecnica (<em>Performance Trust</em>) e integrità morale (<em>Moral Trust</em>) a seguito di un inganno deliberato del robot in scenari interattivi competitivi o assistivi.
+                        </div>
+                    </div>
+
+                    <!-- Kim & Suzuki 2011 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-icsr">Springer LNAI / ICSR 2011</span>
+                            <span class="bib-year">2011</span>
+                        </div>
+                        <h4 class="bib-title">Analysis of Bluffing Behavior in Human-Humanoid Poker Game</h4>
+                        <div class="bib-authors">Y. Kim, K. Suzuki</div>
+                        <div class="bib-source"><em>International Conference on Social Robotics (ICSR 2011)</em>, Lecture Notes in Artificial Intelligence (LNAI 7072), Springer, pp. 275–284.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.1007/978-3-642-25504-5_28" target="_blank" rel="noopener">10.1007/978-3-642-25504-5_28</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Studio pionieristico sulle dinamiche di bluff tra umani e robot umanoidi in un gioco di carte, analizzando la leggibilità dei segnali corporei non verbali e la risposta psicologica dei partecipanti di fronte a contese strategiche.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sezione Metodologia Psicometrica e Bias Cognitivi -->
+                <div class="bib-category-title" style="margin-top: 2rem;">
+                    <span>📐</span> Metodologia Psicometrica, Bias Cognitivi e Power Analysis
+                </div>
+
+                <div class="bib-grid">
+                    <!-- Ullman & Malle 2018 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-metric">Scala MDMT</span>
+                            <span class="bib-year">2018</span>
+                        </div>
+                        <h4 class="bib-title">What Does it Mean to Trust a Robot? Steps Toward a Multidimensional Measure of Trust (MDMT)</h4>
+                        <div class="bib-authors">D. Ullman, B. F. Malle</div>
+                        <div class="bib-source"><em>Companion of the 2018 ACM/IEEE International Conference on Human-Robot Interaction (HRI '18)</em>, Chicago, USA, pp. 263–264.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.1145/3173386.3177074" target="_blank" rel="noopener">10.1145/3173386.3177074</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Validazione psicometrica della scala MDMT a 16 item su scala 0–7 (8 livelli), impiegata per dissociare rigorosamente le sottoscale di Capacità/Affidabilità (Performance) da Etica/Sincerità (Moral Trust).
+                        </div>
+                    </div>
+
+                    <!-- Hart & Staveland 1988 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-metric">NASA-TLX</span>
+                            <span class="bib-year">1988</span>
+                        </div>
+                        <h4 class="bib-title">Development of NASA-TLX (Task Load Index): Results of Empirical and Theoretical Research</h4>
+                        <div class="bib-authors">S. G. Hart, L. E. Staveland</div>
+                        <div class="bib-source"><em>Advances in Psychology</em>, Vol. 52, North-Holland, pp. 139–183.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.1016/S0166-4115(08)62386-9" target="_blank" rel="noopener">10.1016/S0166-4115(08)62386-9</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Strumento standard per la quantificazione multidimensionale del carico di lavoro mentale, della pressione temporale e della frustrazione emotiva sperimentata dai soggetti durante la manipolazione.
+                        </div>
+                    </div>
+
+                    <!-- Kahneman & Tversky 1979 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-theory">Loss Aversion</span>
+                            <span class="bib-year">1979</span>
+                        </div>
+                        <h4 class="bib-title">Prospect Theory: An Analysis of Decision under Risk</h4>
+                        <div class="bib-authors">D. Kahneman, A. Tversky</div>
+                        <div class="bib-source"><em>Econometrica</em>, 47(2), pp. 263–291.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.2307/1914185" target="_blank" rel="noopener">10.2307/1914185</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Inquadramento teorico del bias di avversione alle perdite (<em>Loss Aversion</em>), attivato nell'esperimento mediante il premio tangibile (sticker per i soli vincitori) per garantire autentica validità ecologica alle decisioni di puntata.
+                        </div>
+                    </div>
+
+                    <!-- Faul et al. 2007 -->
+                    <div class="bib-card">
+                        <div class="bib-card-header">
+                            <span class="bib-tag tag-stat">G*Power 3.1</span>
+                            <span class="bib-year">2007</span>
+                        </div>
+                        <h4 class="bib-title">G*Power 3: A Flexible Statistical Power Analysis Program for the Social, Behavioral, and Biomedical Sciences</h4>
+                        <div class="bib-authors">F. Faul, E. Erdfelder, A.-G. Lang, A. Buchner</div>
+                        <div class="bib-source"><em>Behavior Research Methods</em>, 39(2), pp. 175–191.</div>
+                        <div class="bib-doi">DOI: <a href="https://doi.org/10.3758/BF03193146" target="_blank" rel="noopener">10.3758/BF03193146</a></div>
+                        <div class="bib-annotation">
+                            <strong>Rilevanza per lo Studio:</strong> Modello di calcolo per la Power Analysis formale a priori (ANOVA Repeated Measures: f=0.25, &alpha;=0.05, 3 misure ripetute), confermando una potenza statistica del 95.1% per il campione N = 43 partecipanti.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
-        <p>Trust Dynamics and Manipulation in Human-Robot Interaction &bull; Studio Sperimentale HRI con Robot Fisico NAO &bull; Dashboard Analitica</p>
+        <p>Valutazione dell'adattamento comportamentale e della fiducia in contesti competitivi &bull; Studio Sperimentale HRI con Robot Fisico NAO &bull; Dashboard Analitica</p>
     </footer>
 
     <script src="processed_data.js"></script>
