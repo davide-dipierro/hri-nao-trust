@@ -316,11 +316,7 @@
                             <div class="hypo-quick-kpi">
                                 <div class="hypo-kpi-item">
                                     <span class="hypo-kpi-label">Dinamica Resa (Fold Rate):</span>
-                                    <strong class="hypo-kpi-val" id="h1-stat-summary">Fold 4.7% &rarr; 18.6% (&times;4.0) &rarr; 0.0%</strong>
-                                </div>
-                                <div class="hypo-kpi-item">
-                                    <span class="hypo-kpi-label">Verifica post-bluff:</span>
-                                    <strong class="hypo-kpi-val text-success" id="h1-card-verif">&chi;&sup2; = 8.00 (p = 0.005**)</strong>
+                                    <strong class="hypo-kpi-val" id="h1-stat-summary">Fold 4.7% &rarr; 18.6% (&times;4.0)</strong>
                                 </div>
                                 <div class="hypo-kpi-item">
                                     <span class="hypo-kpi-label">Moderatore competenza:</span>
@@ -334,13 +330,9 @@
                             <div>
                                 <div class="hypo-col-title"><span>🔬</span> Test Statistici Inferenziali</div>
                                 <div class="test-stat-table">
-                                    <div class="test-stat-row">
-                                        <div class="stat-name">McNemar Baseline &rarr; Bluff</div>
-                                        <div class="stat-val" id="h1-formal-base-bluff">&chi;&sup2;(1) = 4.500, p = 0.034* (Binomiale esatto p = 0.070)</div>
-                                    </div>
                                     <div class="test-stat-row highlight-row">
-                                        <div class="stat-name">McNemar Bluff &rarr; Verifica</div>
-                                        <div class="stat-val font-bold text-success" id="h1-formal-bluff-verif">&chi;&sup2;(1) = 8.000, p = 0.005** (Binomiale mono-coda p = 0.004**)</div>
+                                        <div class="stat-name">McNemar Baseline &rarr; Bluff (Fold)</div>
+                                        <div class="stat-val font-bold text-success" id="h1-formal-base-bluff">&chi;&sup2;(1) = 4.500, p = 0.034* (Binomiale esatto p = 0.070)</div>
                                     </div>
                                     <div class="test-stat-row highlight-row">
                                         <div class="stat-name">Moderatore Competenza Carte</div>
@@ -353,7 +345,7 @@
                                 </div>
                             </div>
                             <div class="test-interpretation-box" id="h1-formal-interpretation">
-                                <strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da 4.7% a 18.6% (McNemar &chi;&sup2; = 4.50, p = 0.034*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = 8.00, p = 0.005**, binomiale esatto p = 0.004**). L'esperienza nel gioco agisce come fattore protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = -0.38, p = 0.012*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.
+                                <strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da 4.7% a 18.6% (McNemar &chi;&sup2; = 4.50, p = 0.034*). L'esperienza nel gioco agisce come fattore protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = -0.38, p = 0.012*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.
                             </div>
                         </div>
                     </div>
@@ -409,6 +401,10 @@
                                     <span class="hypo-kpi-label">Risposta All-in post-inganno:</span>
                                     <strong class="hypo-kpi-val text-success" id="h2-card-allin">&chi;&sup2; = 29.0 (p &lt; 0.001***)</strong>
                                 </div>
+                                <div class="hypo-kpi-item">
+                                    <span class="hypo-kpi-label">Resa post-inganno (Fold 0%):</span>
+                                    <strong class="hypo-kpi-val text-success" id="h2-card-verif">&chi;&sup2; = 8.00 (p = 0.005**)</strong>
+                                </div>
                             </div>
                         </div>
 
@@ -418,22 +414,21 @@
                                 <div class="hypo-col-title"><span>🔬</span> Test Statistici Inferenziali</div>
                                 <div class="test-stat-table">
                                     <div class="test-stat-row highlight-row">
+                                        <div class="stat-name">McNemar Baseline &rarr; Verifica (All-in)</div>
+                                        <div class="stat-val font-bold text-success" id="h2-formal-allin">McNemar &chi;&sup2;(1) = 29.0, p &lt; 0.001*** (All-in sale da 7.0% a 74.4%)</div>
+                                    </div>
+                                    <div class="test-stat-row highlight-row">
+                                        <div class="stat-name">McNemar Bluff &rarr; Verifica (Fold)</div>
+                                        <div class="stat-val font-bold text-success" id="h2-formal-bluff-verif">&chi;&sup2;(1) = 8.000, p = 0.005** (Binomiale mono-coda p = 0.004**)</div>
+                                    </div>
+                                    <div class="test-stat-row highlight-row">
                                         <div class="stat-name">Item "Sincero" vs Punto Neutro (3.5 / 4.0)</div>
                                         <div class="stat-val font-bold text-success" id="h2-formal-sincero-mid">t(7) = -3.32, p = 0.013* (vs neutro teorico 3.5); t(7) = -4.20, p = 0.004** (vs 4.0)</div>
                                     </div>
-                                    <div class="test-stat-row">
-                                        <div class="stat-name">Paired t-test Capacità vs Sincerità</div>
-                                        <div class="stat-val" id="h2-formal-cap-sinc">&Delta; = +1.66 punti (Capacità 3.28 vs Sincero 1.63, t(7) = 2.58, p = 0.037*)</div>
-                                    </div>
-                                    <div class="test-stat-row">
-                                        <div class="stat-name">Paired t-test Perf vs Moral (Folded)</div>
-                                        <div class="stat-val" id="h2-formal-perf-moral">Performance 3.35 vs Moral 2.97 (&Delta; = +0.38, t(7) = 0.67, p = 0.523 n.s., d = 0.24)</div>
-                                    </div>
                                     <div class="test-stat-row highlight-row">
-                                        <div class="stat-name">All-in Spike (Baseline &rarr; Verifica)</div>
-                                        <div class="stat-val font-bold text-success" id="h2-formal-allin">McNemar &chi;&sup2;(1) = 29.0, p &lt; 0.001*** (All-in sale da 7.0% a 74.4%)</div>
+                                        <div class="stat-name">Paired t-test Capacità vs Sincerità</div>
+                                        <div class="stat-val font-bold text-success" id="h2-formal-cap-sinc">&Delta; = +1.66 punti (Capacità 3.28 vs Sincero 1.63, t(7) = 2.58, p = 0.037*)</div>
                                     </div>
-
                                     <div class="test-stat-row">
                                         <div class="stat-name">Item "Qualcuno su cui contare"</div>
                                         <div class="stat-val font-bold text-primary" id="h2-formal-contare">r = -0.29, t(41) = -1.95, p = 0.058 &dagger;</div>
@@ -441,7 +436,7 @@
                                 </div>
                             </div>
                             <div class="test-interpretation-box" id="h2-formal-interpretation">
-                                <strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a 1.63/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(7) = -3.32, p = 0.013*, d = -1.17; t(7) = -4.20, p = 0.004** rispetto a 4.0). La risposta All-in balza da 7.0% a 74.4% (&chi;&sup2; = 29.0, p &lt; 0.001***), evidenziando la decisa reazione comportamentale post-svelamento. Il confronto aggregato Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7, p = 0.013*) e sull'affidabilità relazionale (r = -0.29, p = 0.058&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).
+                                <strong>Esito Inferenziale:</strong> La risposta All-in balza da 7.0% a 74.4% (&chi;&sup2; = 29.0, p &lt; 0.001***) e il tasso di resa (Fold) si azzera completamente (da 18.6% a 0.0%, McNemar &chi;&sup2; = 8.00, p = 0.005**, binomiale mono-coda p = 0.004**), sancendo la totale resistenza comportamentale dell'utente post-svelamento. A livello psicometrico, la dissociazione fiduciaria è netta: nei soggetti ingannati la sincerità crolla a 1.63/7, significativamente sotto il punto neutro (t(7) = -3.32, p = 0.013*, d = -1.17; t(7) = -4.20, p = 0.004** vs 4.0) e distaccata dalle capacità tecniche percepite (&Delta; = +1.66 punti, t(7) = 2.58, p = 0.037*). L'inganno distrugge in modo mirato l'affidabilità relazionale e morale senza intaccare le competenze algoritmiche del robot (3.28/7).
                             </div>
                         </div>
                     </div>

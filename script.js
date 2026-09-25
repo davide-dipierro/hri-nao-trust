@@ -119,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const pSign = h1bb.p_value < 0.01 ? '**' : (h1bb.p_value < 0.05 ? '*' : '');
                 h1Badge.innerHTML = `&chi;&sup2;=${h1bb.chi2.toFixed(2)}, p=${h1bb.p_value < 0.001 ? '<0.001' : h1bb.p_value.toFixed(3)}${pSign}`;
             }
-            if (h1Stat && h1bb && h1bv) {
-                h1Stat.innerText = `Fold ${h1bb.fold_baseline_pct}% → ${h1bb.fold_bluff_pct}% (×${h1bb.fold_multiplier}) → ${h1bv.fold_verification_pct}%`;
+            if (h1Stat && h1bb) {
+                h1Stat.innerText = `Fold ${h1bb.fold_baseline_pct}% → ${h1bb.fold_bluff_pct}% (×${h1bb.fold_multiplier})`;
             }
             if (h1CardVerif && h1bv) {
                 const pSign = h1bv.p_value < 0.01 ? '**' : (h1bv.p_value < 0.05 ? '*' : '');
@@ -156,9 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     h1FormalExtremeExp.innerHTML = `1.88/5 vs 3.12/5 &bull; t(22) = -2.30, p = 0.031*`;
                 }
             }
-            if (h1FormalInterp && h1bb && h1bv && h1mod) {
-                const exactMono = h1bv.exact_p_value_one_tailed ? h1bv.exact_p_value_one_tailed.toFixed(3) : (h1bv.exact_p_value / 2.0).toFixed(3);
-                h1FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da ${h1bb.fold_baseline_pct}% a ${h1bb.fold_bluff_pct}% (McNemar &chi;&sup2; = ${h1bb.chi2.toFixed(2)}, p = ${h1bb.p_value.toFixed(3)}*). Nella verifica post-inganno si azzera con elevata significatività (&chi;&sup2; = ${h1bv.chi2.toFixed(2)}, p = ${h1bv.p_value.toFixed(3)}**, binomiale esatto p = ${exactMono}**). L'esperienza nel gioco agisce come fattore protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = ${h1mod.pearson_r_bluff.toFixed(2)}, p = ${h1mod.pearson_p_bluff.toFixed(3)}*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.`;
+            if (h1FormalInterp && h1bb && h1mod) {
+                h1FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Il Fold Rate quadruplica da ${h1bb.fold_baseline_pct}% a ${h1bb.fold_bluff_pct}% (McNemar &chi;&sup2; = ${h1bb.chi2.toFixed(2)}, p = ${h1bb.p_value.toFixed(3)}*). L'esperienza nel gioco agisce come fattore protettivo: il confronto diretto tra chi è caduto (1.88/5) e gli immuni All-in (3.12/5) è statisticamente significativo (t(22) = -2.30, p = 0.031*, r = ${h1mod.pearson_r_bluff.toFixed(2)}, p = ${h1mod.pearson_p_bluff.toFixed(3)}*), confermando che l'expertise riduce la vulnerabilità all'Overtrust verso il robot.`;
             }
         }
 
@@ -167,11 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const h2Stat = document.getElementById('h2-stat-summary');
         const h2CardSinc = document.getElementById('h2-card-sinc');
         const h2CardAllin = document.getElementById('h2-card-allin');
+        const h2CardVerif = document.getElementById('h2-card-verif');
         const h2FormalStatus = document.getElementById('h2-formal-status');
         const h2FormalSinc = document.getElementById('h2-formal-sincero-mid');
         const h2FormalCapSinc = document.getElementById('h2-formal-cap-sinc');
-        const h2FormalPerfMoral = document.getElementById('h2-formal-perf-moral');
         const h2FormalAllin = document.getElementById('h2-formal-allin');
+        const h2FormalBluffVerif = document.getElementById('h2-formal-bluff-verif');
         const h2FormalContare = document.getElementById('h2-formal-contare');
         const h2FormalInterp = document.getElementById('h2-formal-interpretation');
 
@@ -179,8 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (formalH2) {
             const sincItem = formalH2.sincero_item_vs_midpoint;
             const capSinc = formalH2.capacity_vs_sincero_item;
-            const perfMoral = formalH2.perf_vs_moral_folded;
             const allinShift = formalH2.mcnemar_allin_shift;
+            const h1bv = ft.h1 ? ft.h1.bluff_vs_verification : null;
             const contareQ = questionnaireData.all_questions.find(q => q.question === 'Qualcuno su cui puoi contare');
             const corrDf = userData.length - 2;
 
@@ -203,6 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (h2CardAllin && allinShift) {
                 h2CardAllin.innerHTML = `&chi;&sup2; = ${allinShift.chi2.toFixed(1)} (p &lt; 0.001***)`;
             }
+            if (h2CardVerif && h1bv) {
+                const pSign = h1bv.p_value < 0.01 ? '**' : (h1bv.p_value < 0.05 ? '*' : '');
+                h2CardVerif.innerHTML = `&chi;&sup2; = ${h1bv.chi2.toFixed(2)} (p = ${h1bv.p_value < 0.001 ? '<0.001' : h1bv.p_value.toFixed(3)}${pSign})`;
+            }
             if (h2FormalStatus && sincItem) {
                 h2FormalStatus.innerText = 'Confermata (p < 0.01)';
                 h2FormalStatus.className = 'stat-pill pill-success';
@@ -216,20 +220,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (h2FormalCapSinc && capSinc) {
                 h2FormalCapSinc.innerHTML = `&Delta; = +${capSinc.mean_diff.toFixed(2)} punti (Capacità ${capSinc.mean_capacity.toFixed(2)} vs Sincero ${capSinc.mean_sincero.toFixed(2)}, t(${capSinc.df}) = ${capSinc.t_stat.toFixed(2)}, p = ${capSinc.p_value.toFixed(3)}*)`;
             }
-            if (h2FormalPerfMoral && perfMoral) {
-                h2FormalPerfMoral.innerHTML = `Performance ${perfMoral.mean_perf.toFixed(2)} vs Moral ${perfMoral.mean_moral.toFixed(2)} (&Delta; = +${perfMoral.mean_diff.toFixed(2)}, t(${perfMoral.df}) = ${perfMoral.t_stat.toFixed(2)}, p = ${perfMoral.p_value.toFixed(3)} n.s., d = ${perfMoral.cohen_dz.toFixed(2)})`;
-            }
             if (h2FormalAllin && allinShift) {
                 h2FormalAllin.innerHTML = `McNemar &chi;&sup2;(1) = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001*** (All-in sale da ${experimentData.establishment.allin_rate.toFixed(1)}% a ${experimentData.bluff_2.allin_rate.toFixed(1)}%)`;
+            }
+            if (h2FormalBluffVerif && h1bv) {
+                const pSign = h1bv.p_value < 0.01 ? '**' : (h1bv.p_value < 0.05 ? '*' : '');
+                const exactMono = h1bv.exact_p_value_one_tailed ? h1bv.exact_p_value_one_tailed.toFixed(3) : (h1bv.exact_p_value / 2.0).toFixed(3);
+                h2FormalBluffVerif.innerHTML = `&chi;&sup2;(1) = ${h1bv.chi2.toFixed(3)}, p = ${h1bv.p_value.toFixed(3)}${pSign} (Binomiale mono-coda p = ${exactMono}${pSign})`;
             }
             if (h2FormalContare && contareQ) {
                 const contareT = (contareQ.corr_bluff * Math.sqrt(corrDf / (1 - contareQ.corr_bluff * contareQ.corr_bluff))).toFixed(2);
                 h2FormalContare.innerHTML = `r = ${contareQ.corr_bluff.toFixed(2)}, t(${corrDf}) = ${contareT}, p = ${contareQ.p_bluff.toFixed(3)} &dagger;`;
             }
-            if (h2FormalInterp && sincItem && allinShift && capSinc && perfMoral) {
+            if (h2FormalInterp && sincItem && allinShift && capSinc) {
                 const t35 = sincItem.t_stat_35 !== undefined ? sincItem.t_stat_35.toFixed(2) : '-3.32';
-                const p35 = sincItem.p_value_35 !== undefined ? sincItem.p_value_35.toFixed(3) : '0.013';
-                h2FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> Nei soggetti ingannati la sincerità crolla a ${sincItem.mean.toFixed(2)}/7, significativamente sotto il punto neutro teorico 3.5 per scala 0-7 a 8 livelli (t(${sincItem.df}) = ${t35}, p = ${p35}*, d = -1.17; t(${sincItem.df}) = ${sincItem.t_stat.toFixed(2)}, p = ${sincItem.p_value.toFixed(3)}** rispetto a 4.0). La risposta All-in balza dal ${experimentData.establishment.allin_rate.toFixed(1)}% al ${experimentData.bluff_2.allin_rate.toFixed(1)}% (&chi;&sup2; = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001***), evidenziando la decisa reazione comportamentale post-svelamento. Il confronto complessivo Performance vs Morale (t(7) = 0.67, p = 0.523) evidenzia la specificità dell'effetto: il crollo morale si concentra in modo mirato sulla sincerità (1.63/7) e sull'affidabilità relazionale (r = -0.27, p = 0.076&dagger;), preservando pienamente le competenze tecniche del robot (3.28/7).`;
+                const p35 = sincItem.p_value_35 !== undefined ? (sincItem.p_value_35 < 0.001 ? '< 0.001***' : sincItem.p_value_35.toFixed(3) + '*') : '0.013*';
+                const t40 = (sincItem.t_stat_40 !== undefined ? sincItem.t_stat_40 : sincItem.t_stat).toFixed(2);
+                const p40 = (sincItem.p_value_40 !== undefined ? sincItem.p_value_40 : sincItem.p_value).toFixed(3);
+                h2FormalInterp.innerHTML = `<strong>Esito Inferenziale:</strong> La risposta All-in balza da ${experimentData.establishment.allin_rate.toFixed(1)}% a ${experimentData.bluff_2.allin_rate.toFixed(1)}% (&chi;&sup2; = ${allinShift.chi2.toFixed(1)}, p &lt; 0.001***) e il tasso di resa (Fold) si azzera completamente (da 18.6% a 0.0%, McNemar &chi;&sup2; = 8.00, p = 0.005**, binomiale mono-coda p = 0.004**), sancendo la totale resistenza comportamentale dell'utente post-svelamento. A livello psicometrico, la dissociazione fiduciaria è netta: nei soggetti ingannati la sincerità crolla a ${sincItem.mean.toFixed(2)}/7, significativamente sotto il punto neutro (t(${sincItem.df}) = ${t35}, p = ${p35}, d = -1.17; t(${sincItem.df}) = ${t40}, p = ${p40}** vs 4.0) e distaccata dalle capacità tecniche percepite (&Delta; = +${capSinc.mean_diff.toFixed(2)} punti, t(${capSinc.df}) = ${capSinc.t_stat.toFixed(2)}, p = ${capSinc.p_value.toFixed(3)}*). L'inganno distrugge in modo mirato l'affidabilità relazionale e morale senza intaccare le competenze algoritmiche del robot (${capSinc.mean_capacity.toFixed(2)}/7).`;
             }
         }
     }
